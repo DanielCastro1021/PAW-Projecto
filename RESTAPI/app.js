@@ -3,11 +3,30 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
+//var swaggerUi = require('swagger-ui-express');
+//var swaggerDocument = require('./swagger.json');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var donationsRouter = require('./routes/donations');
+var campainsRouter = require('./routes/campains');
+
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/donationsDB').then(() =>
+  console.log('Connection succesful to donationsDB!').catch(err => {
+    console.log(err);
+  })
+);
 
 var app = express();
+
+//Cors
+app.use(cors());
+
+//Swagger
+//app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +39,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/donations', donationsRouter);
+app.use('/api/v1/campains', campainsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
