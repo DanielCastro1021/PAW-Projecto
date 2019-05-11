@@ -3,7 +3,7 @@ var Donation = require('../models/donation');
 
 var donationController = {};
 
-donationController.create = (req, res, next) => {
+donationController.createDonation = (req, res, next) => {
   var donation = new Donation(req.body);
   donation.save(err => {
     if (err) {
@@ -14,7 +14,7 @@ donationController.create = (req, res, next) => {
   });
 };
 
-donationController.update = (req, res, next) => {
+donationController.updateDonation = (req, res, next) => {
   Donation.findOneAndUpdate(
     req.body.id,
     req.body,
@@ -29,7 +29,7 @@ donationController.update = (req, res, next) => {
   );
 };
 
-donationController.remove = (req, res, next) => {
+donationController.removeDonation = (req, res, next) => {
   req.donation.remove(err => {
     if (err) {
       next(err);
@@ -39,11 +39,11 @@ donationController.remove = (req, res, next) => {
   });
 };
 
-donationController.getOne = (req, res, next) => {
+donationController.getOneDonation = (req, res, next) => {
   res.json(req.donation);
 };
 
-donationController.getById = (req, res, next, id) => {
+donationController.getDonationById = (req, res, next, id) => {
   Donation.findOne({ _id: id }, (err, donation) => {
     if (err) {
       next(err);
@@ -54,7 +54,7 @@ donationController.getById = (req, res, next, id) => {
   });
 };
 
-donationController.getAll = (req, res, next) => {
+donationController.getAllDonations = (req, res, next) => {
   Donation.find((err, donations) => {
     if (err) {
       next(err);

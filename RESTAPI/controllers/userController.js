@@ -1,27 +1,9 @@
 var mongoose = require('mongoose');
-var passport = require('passport');
 var User = require('../models/user');
 
 var userController = {};
 
-userController.authenticate = (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      return res.status(501).json(err);
-    }
-    if (!user) {
-      return res.status(501).json(info);
-    }
-    req.logIn(user, err => {
-      if (err) {
-        return res.status(501).json(err);
-      }
-      return res.status(200).json({ message: 'Login Success' });
-    });
-  })(req, res, next);
-};
-
-userController.create = (req, res, next) => {
+userController.createUser = (req, res, next) => {
   var user = new User(req.body);
 
   user.save(err => {
@@ -33,22 +15,17 @@ userController.create = (req, res, next) => {
   });
 };
 
-userController.update = (req, res, next) => {
-  User.findOneAndUpdate(
-    req.body.username,
-    req.body,
-    { new: true },
-    (err, user) => {
-      if (err) {
-        next(err);
-      } else {
-        res.json(user);
-      }
+userController.updateUser = (req, res, next) => {
+  User.findOneAndUpdate(req.body.id, req.body, { new: true }, (err, user) => {
+    if (err) {
+      next(err);
+    } else {
+      res.json(user);
     }
-  );
+  });
 };
 
-userController.remove = (req, res, next) => {
+userController.removeUser = (req, res, next) => {
   req.user.remove(err => {
     if (err) {
       next(err);
@@ -57,9 +34,27 @@ userController.remove = (req, res, next) => {
     }
   });
 };
-
-userController.getOne = (req, res, next) => {
+userController.getOneUser = (req, res, next) => {
   res.json(req.user);
+};
+userController.getUserById = (req, res, next, id) => {
+  User.findOne({ _id: id }, (err, user) => {
+    if (err) {
+      next(err);
+    } else {
+      req.user = user;
+      next();
+    }
+  });
+};
+userController.getAllUsers = (req, res, next) => {
+  Product.find((err, users) => {
+    if (err) {
+      next(err);
+    } else {
+      res.json(users);
+    }
+  });
 };
 
 module.exports = userController;
