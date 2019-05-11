@@ -10,20 +10,39 @@ var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var donationsRouter = require('./routes/donations');
-var campainsRouter = require('./routes/campains');
-
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/donationsDB').then(() =>
-  console.log('Connection succesful to donationsDB!').catch(err => {
-    console.log(err);
-  })
-);
+var campaignsRouter = require('./routes/campaigns');
 
 var app = express();
 
 //Cors
 app.use(cors());
+
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/donationsDB');
+
+//passport
+var passport = require('passport');
+var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+app.use(
+  session({
+    name: 'myname.sid',
+    resave: false,
+    saveUninitialized: false,
+    secret: 'secret',
+    cookie: {
+      maxAge: 36000000,
+      httpOnly: false,
+      secure: false
+    },
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
+
+require('./config/passport');
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Swagger
 //app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -39,9 +58,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api/v1/users', usersRouter);
+app.use('/users', usersRouter);
 app.use('/api/v1/donations', donationsRouter);
-app.use('/api/v1/campains', campainsRouter);
+app.use('/api/v1/campaigns', campaignsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
