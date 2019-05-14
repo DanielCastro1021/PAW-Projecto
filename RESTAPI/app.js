@@ -7,18 +7,14 @@ var cors = require('cors');
 //var swaggerUi = require('swagger-ui-express');
 //var swaggerDocument = require('./swagger.json');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var authRouter = require('./routes/auth');
 var donationsRouter = require('./routes/donations');
 var campainsRouter = require('./routes/campains');
 
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/donationsDB').then(() =>
-  console.log('Connection succesful to donationsDB!').catch(err => {
-    console.log(err);
-  })
-);
+mongoose.connect('mongodb://127.0.0.1:27017/donationsDB', {
+  useNewUrlParser: true
+});
 
 var app = express();
 
@@ -38,8 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/donations', donationsRouter);
 app.use('/api/v1/campains', campainsRouter);
 
