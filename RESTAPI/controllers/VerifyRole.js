@@ -1,15 +1,24 @@
-var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
+var jwt = require('jsonwebtoken');
 var config = require('../config/config'); // get our config file
 
-function verifyToken(req, res, next) {
-  // check header or url parameters or post parameters for token
+function verifyRole(req, res, next) {
+  var role = req.headers['role'];
   var token = req.headers['bearer'];
   console.error(req.headers);
+
   if (!token)
     return res.status(403).send({ auth: false, message: 'No token provided.' });
 
+  if (!role)
+    return res.status(403).send({ auth: false, message: 'No role provided.' });
+
+  if (role !== 'admin')
+    return res
+      .status(403)
+      .send({ auth: false, message: 'Admin permissions needed.' });
+
   // verifies secret and checks exp
-  jwt.verify(token, config.secret, function(err, decoded) {
+  jwt.verify(token, config.secret, (err, decoded) => {
     if (err)
       return res
         .status(500)
@@ -21,4 +30,4 @@ function verifyToken(req, res, next) {
   });
 }
 
-module.exports = verifyToken;
+module.exports = verifyRole;

@@ -7,9 +7,9 @@ var cors = require('cors');
 //var swaggerUi = require('swagger-ui-express');
 //var swaggerDocument = require('./swagger.json');
 
-var authRouter = require('./routes/auth');
+var authenticationRouter = require('./routes/authentication');
 var donationsRouter = require('./routes/donations');
-var campainsRouter = require('./routes/campains');
+var campaignsRouter = require('./routes/campaigns');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/donationsDB', {
@@ -34,9 +34,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/v1/auth', authRouter);
+app.use('/api/auth', authenticationRouter);
 app.use('/api/v1/donations', donationsRouter);
-app.use('/api/v1/campains', campainsRouter);
+app.use('/api/v1/campaigns', campaignsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

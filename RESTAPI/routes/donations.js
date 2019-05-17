@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var donationController = require('../controllers/donationController');
-var verifyToken = require('../controllers/VerifiyToken');
+var donationController = require('../controllers/DonationController');
+var verifyToken = require('../controllers/VerifyToken');
 
 router.get('/', verifyToken, donationController.getAllDonations);
 router.post('/', verifyToken, donationController.createDonation);

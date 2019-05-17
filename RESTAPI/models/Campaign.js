@@ -8,16 +8,11 @@ var campainSchema = new Schema(
     amount: { type: Number, min: 0.1, required: true },
     iban: { type: Number, required: true },
     contribuiters: {
-      type: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: 'User'
-        }
-      ],
+      type: [{ type: String }],
       required: true
     }
   },
-  { collection: 'campainCollection' }
+  { collection: 'campaignCollection' }
 );
 
 module.exports = mongoose.model('Campain', campainSchema);

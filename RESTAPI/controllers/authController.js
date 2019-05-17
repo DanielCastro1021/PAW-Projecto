@@ -15,8 +15,8 @@ var config = require('../config/config'); // get config file
 
 var authController = {};
 
-authController.login = function(req, res) {
-  User.findOne({ email: req.body.email }, function(err, user) {
+authController.login = (req, res) => {
+  User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
       return res.status(500).send('Error on the server.');
     }
@@ -40,26 +40,26 @@ authController.login = function(req, res) {
       id: user.__id,
       name: user.name,
       email: user.email,
-      token: token
+      token: token,
+      role: user.role
     });
   });
 };
 
-authController.logout = function(req, res) {
+authController.logout = (req, res) => {
   res.status(200).send({ auth: false, token: null });
 };
 
-authController.register = function(req, res) {
+authController.register = (req, res) => {
   var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
-  //TODO: Change User Creation
   User.create(
     {
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword
     },
-    function(err, user) {
+    (err, user) => {
       if (err)
         return res
           .status(500)
@@ -77,7 +77,7 @@ authController.register = function(req, res) {
 };
 
 authController.me = function(req, res, next) {
-  User.findById(req.userId, { password: 0 }, function(err, user) {
+  User.findById(req.userId, { password: 0 }, (err, user) => {
     if (err)
       return res.status(500).send('There was a problem finding the user.');
     if (!user) return res.status(404).send('No user found.');
