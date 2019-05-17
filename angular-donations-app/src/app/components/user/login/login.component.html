@@ -1,0 +1,16 @@
+<div>
+  <h2>Login</h2>
+  <div>
+    <label
+      >Email:
+      <input [(ngModel)]="userData.email" placeholder=" email" /> </label
+    ><br />
+    <label
+      >Password:
+      <input [(ngModel)]="userData.password" placeholder="password" />
+    </label>
+    <br />
+  </div>
+  <button (click)="login()">Login</button>
+  <a routerLink="/register">Sign In</a>
+</div>
