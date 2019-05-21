@@ -5,6 +5,7 @@ import { AdminGuard } from './guards/admin/admin.guard';
 import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
+import { CampaignListComponent } from './components/campaigns/campaign-list/campaign-list.component';
 
 const routes: Routes = [
   {
@@ -14,8 +15,12 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // otherwise redirect to home,
-  { path: '**', redirectTo: 'login' }
+  {
+    path: 'campaigns',
+    component: CampaignListComponent,
+    canActivate: [AuthenticationGuard]
+  }
+  //{ path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({

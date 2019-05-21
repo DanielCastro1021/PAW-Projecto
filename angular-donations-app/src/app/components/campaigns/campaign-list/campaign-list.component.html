@@ -1,0 +1,18 @@
+<h2>Our Campaigns</h2>
+
+<div>
+  <button (click)="add()">
+    Add
+  </button>
+</div>
+
+<ul class="campaigns">
+  <li *ngFor="let c of campaigns; let i = index">
+    <a routerLink="/campaigns-details/{{ p._id }}">
+      <span class="badge">{{ i + 1 }}</span> {{ p.name }}
+    </a>
+    <button class="delete" title="delete campaign" (click)="delete(p._id)">
+      x
+    </button>
+  </li>
+</ul>

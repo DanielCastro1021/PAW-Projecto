@@ -12,13 +12,21 @@ import { JwtInterceptor } from './helper/jwt.interceptor';
 import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
+import { CampaignListComponent } from './components/campaigns/campaign-list/campaign-list.component';
+import { CampaignAddComponent } from './components/campaigns/campaign-add/campaign-add.component';
+import { CampaignDetailsComponent } from './components/campaigns/campaign-details/campaign-details.component';
+import { CampaignEditComponent } from './components/campaigns/campaign-edit/campaign-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    CampaignListComponent,
+    CampaignAddComponent,
+    CampaignDetailsComponent,
+    CampaignEditComponent
   ],
   imports: [
     BrowserModule,
