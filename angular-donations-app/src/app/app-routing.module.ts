@@ -6,6 +6,9 @@ import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { CampaignListComponent } from './components/campaigns/campaign-list/campaign-list.component';
+import { CampaignDetailsComponent } from './components/campaigns/campaign-details/campaign-details.component';
+import { CampaignAddComponent } from './components/campaigns/campaign-add/campaign-add.component';
+import { CampaignEditComponent } from './components/campaigns/campaign-edit/campaign-edit.component';
 
 const routes: Routes = [
   {
@@ -17,10 +20,21 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: 'campaigns',
-    component: CampaignListComponent,
-    canActivate: [AuthenticationGuard]
-  }
-  //{ path: '**', redirectTo: 'login'}
+    component: CampaignListComponent
+  },
+  {
+    path: 'campaign-add',
+    component: CampaignAddComponent
+  },
+  {
+    path: 'campaign-edit',
+    component: CampaignEditComponent
+  },
+  {
+    path: 'campaign-detail',
+    component: CampaignDetailsComponent
+  },
+  { path: '**', redirectTo: 'campaigns' }
 ];
 
 @NgModule({

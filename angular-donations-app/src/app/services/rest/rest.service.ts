@@ -29,23 +29,19 @@ export class RestService {
   }
 
   getDonations(): Observable<Donation[]> {
-    return this.http.get<Donation[]>(endpointDonations + 'Donations');
+    return this.http.get<Donation[]>(endpointDonations);
     //.pipe(map(this.extractData));
   }
 
   getDonation(id): Observable<Donation> {
-    return this.http.get<Donation>(endpointDonations + 'Donation/' + id);
+    return this.http.get<Donation>(endpointDonations + '/' + id);
     //.pipe(map(this.extractData));
   }
 
   addDonation(Donation): Observable<Donation> {
     console.log(Donation);
     return this.http
-      .post<any>(
-        endpointDonations + 'Donations',
-        JSON.stringify(Donation),
-        httpOptions
-      )
+      .post<any>(endpointDonations, JSON.stringify(Donation), httpOptions)
       .pipe(
         tap(Donation => console.log(`added Donation w/ id=${Donation.id}`)),
         catchError(this.handleError<any>('addDonation'))
@@ -54,11 +50,7 @@ export class RestService {
 
   updateDonation(id, Donation): Observable<Donation> {
     return this.http
-      .put(
-        endpointDonations + 'Donation/' + id,
-        JSON.stringify(Donation),
-        httpOptions
-      )
+      .put(endpointDonations + '/' + id, JSON.stringify(Donation), httpOptions)
       .pipe(
         tap(_ => console.log(`updated Donation id=${id}`)),
         catchError(this.handleError<any>('updateDonation'))
@@ -67,7 +59,7 @@ export class RestService {
 
   deleteDonation(id): Observable<Donation> {
     return this.http
-      .delete<any>(endpointDonations + 'Donation/' + id, httpOptions)
+      .delete<any>(endpointDonations + '/' + id, httpOptions)
       .pipe(
         tap(_ => console.log(`deleted Donation id=${id}`)),
         catchError(this.handleError<any>('deleteDonation'))
@@ -75,23 +67,19 @@ export class RestService {
   }
 
   getCampaigns(): Observable<Campaign[]> {
-    return this.http.get<Campaign[]>(endpointCampaign + 'Campaigns');
+    return this.http.get<Campaign[]>(endpointCampaign);
     //.pipe(map(this.extractData));
   }
 
   getCampaign(id): Observable<Campaign> {
-    return this.http.get<Campaign>(endpointCampaign + 'Campaign/' + id);
+    return this.http.get<Campaign>(endpointCampaign + '/' + id);
     //.pipe(map(this.extractData));
   }
 
   addCampaign(Campaign): Observable<Campaign> {
     console.log(Campaign);
     return this.http
-      .post<any>(
-        endpointCampaign + 'Campaigns',
-        JSON.stringify(Campaign),
-        httpOptions
-      )
+      .post<any>(endpointCampaign, JSON.stringify(Campaign), httpOptions)
       .pipe(
         tap(Campaign => console.log(`added Campaign w/ id=${Campaign.id}`)),
         catchError(this.handleError<any>('addCampaign'))
@@ -100,11 +88,7 @@ export class RestService {
 
   updateCampaign(id, Campaign): Observable<Campaign> {
     return this.http
-      .put(
-        endpointCampaign + 'Campaign/' + id,
-        JSON.stringify(Campaign),
-        httpOptions
-      )
+      .put(endpointCampaign + '/' + id, JSON.stringify(Campaign), httpOptions)
       .pipe(
         tap(_ => console.log(`updated Campaign id=${id}`)),
         catchError(this.handleError<any>('updateCampaign'))
@@ -112,12 +96,10 @@ export class RestService {
   }
 
   deleteCampaign(id): Observable<Campaign> {
-    return this.http
-      .delete<any>(endpointCampaign + 'Campaign/' + id, httpOptions)
-      .pipe(
-        tap(_ => console.log(`deleted Campaign id=${id}`)),
-        catchError(this.handleError<any>('deleteCampaign'))
-      );
+    return this.http.delete<any>(endpointCampaign + '/' + id, httpOptions).pipe(
+      tap(_ => console.log(`deleted Campaign id=${id}`)),
+      catchError(this.handleError<any>('deleteCampaign'))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

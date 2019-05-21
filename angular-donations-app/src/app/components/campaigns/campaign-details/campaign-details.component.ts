@@ -20,7 +20,7 @@ export class CampaignDetailsComponent implements OnInit {
     this.service
       .getCampaign(this.route.snapshot.params['id'])
       .subscribe((data: {}) => {
-        console.log(data);
+        //console.log(data);
         this.campaign = data;
       });
   }
