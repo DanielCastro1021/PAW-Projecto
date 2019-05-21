@@ -1,0 +1,6 @@
+<div *ngIf="user">
+  <h2>{{ user.name | uppercase }} Profile</h2>
+  <div><span>Email: </span>{{ user.email }}</div>
+  <div><span>Password: </span>{{ user.password }}</div>
+  <div><button (click)="logOut()">Log Out</button></div>
+</div>
