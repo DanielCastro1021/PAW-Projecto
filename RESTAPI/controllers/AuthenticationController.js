@@ -16,7 +16,7 @@ var config = require('../config/config'); // get config file
 var authController = {};
 
 authController.login = (req, res) => {
-  User.findOne({ email: req.body.email }, (err, user) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
       return res.status(500).send('Error on the server.');
     }
@@ -38,8 +38,7 @@ authController.login = (req, res) => {
     // return the information including token as JSON
     res.status(200).send({
       id: user.__id,
-      name: user.name,
-      email: user.email,
+      username: user.username,
       token: token,
       role: user.role
     });
@@ -55,8 +54,7 @@ authController.register = (req, res) => {
 
   User.create(
     {
-      name: req.body.name,
-      email: req.body.email,
+      username: req.body.username,
       password: hashedPassword
     },
     (err, user) => {
@@ -76,7 +74,7 @@ authController.register = (req, res) => {
   );
 };
 
-authController.me = function(req, res, next) {
+authController.me = (req, res, next) => {
   User.findById(req.userId, { password: 0 }, (err, user) => {
     if (err)
       return res.status(500).send('There was a problem finding the user.');
