@@ -20,14 +20,16 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   login() {
-    this.service.login(this.userData.email, this.userData.password).subscribe(
-      result => {
-        console.log(result);
-        this.router.navigate(['/profile']);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    this.service
+      .login(this.userData.username, this.userData.password)
+      .subscribe(
+        result => {
+          console.log(result);
+          this.router.navigate(['/profile']);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 }

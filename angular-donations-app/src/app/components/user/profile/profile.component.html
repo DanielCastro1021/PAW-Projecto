@@ -1,6 +1,16 @@
 <div *ngIf="user">
-  <h2>{{ user.name | uppercase }} Profile</h2>
-  <div><span>Email: </span>{{ user.email }}</div>
-  <div><span>Password: </span>{{ user.password }}</div>
+  <h2>{{ user.fullname | uppercase }} Profile</h2>
+  <div><span>Username: </span>{{ user.username }}</div>
+  <div *ngIf="user.coordinates || user.address">
+    <span>Location: </span><br />
+    <div *ngIf="user.coordinates">
+      <span>Coordinates: </span><br />
+      <span>Latitude: </span>{{{ user.coordinates.latitude }} <br />
+      <span>Longitude: </span>{{{ user.coordinates.longitude }}
+    </div>
+    <div *ngIf="user.address">
+      <span *ngIf="user">Address: </span>{{ user.address }}
+    </div>
+  </div>
   <div><button (click)="logOut()">Log Out</button></div>
 </div>

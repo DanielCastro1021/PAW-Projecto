@@ -9,8 +9,8 @@ const endpoint = 'http://localhost:3000/api/auth/';
 export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string) {
-    return this.http.post<any>(endpoint + 'login', { email, password }).pipe(
+  login(username: string, password: string) {
+    return this.http.post<any>(endpoint + 'login', { username, password }).pipe(
       map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.token) {
