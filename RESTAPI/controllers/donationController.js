@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Donation = require('../models/Donation');
+var Campaign = require('../models/Campaign');
+var User = require('../models/User');
 
 var donationController = {};
 
