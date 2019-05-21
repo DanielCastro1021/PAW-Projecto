@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var donationController = require('../controllers/donationController');
+var donationController = require('../controllers/DonationController');
+var verifyToken = require('../controllers/VerifyToken');
 
-router.get('/', donationController.getAllDonations);
-router.post('/', donationController.createDonation);
+router.get('/', verifyToken, donationController.getAllDonations);
+router.post('/', verifyToken, donationController.createDonation);
 
-router.get('/:donationId', donationController.getOneDonation);
-router.put('/:donationId', donationController.updateDonation);
-router.delete('/:donationId', donationController.removeDonation);
+router.get('/:donationId', verifyToken, donationController.getOneDonation);
+router.put('/:donationId', verifyToken, donationController.updateDonation);
+router.delete('/:donationId', verifyToken, donationController.removeDonation);
 
 router.param('donationId', donationController.getDonationById);
 
