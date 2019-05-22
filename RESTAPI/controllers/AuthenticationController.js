@@ -50,12 +50,20 @@ authController.logout = (req, res) => {
 };
 
 authController.register = (req, res) => {
-  var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  var hashedPassword = bcrypt.hashSync(req.body.user.password, 8);
 
   User.create(
     {
-      username: req.body.username,
-      password: hashedPassword
+      username: req.body.user.username,
+      password: hashedPassword,
+      fullname: req.body.user.fullname,
+      nif: req.body.user.nif,
+      iban: req.body.user.iban,
+      coordinates: {
+        latitude: req.body.user.coordinates.latitude,
+        longitude: req.body.user.coordinates.longitude
+      },
+      address: req.body.user.address
     },
     (err, user) => {
       if (err)
