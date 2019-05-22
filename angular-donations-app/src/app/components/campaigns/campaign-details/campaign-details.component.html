@@ -1,5 +1,5 @@
 <div *ngIf="campaign">
-  <h2>{{ campaign.name | uppercase }} Details</h2>
+  <h2>Details of {{ campaign.name | uppercase }</h2>
   <div>
     <div><span>Description: </span>{{ campaign.description }}</div>
     <br />
@@ -9,14 +9,15 @@
     <br />
     <div><span>IBAN: </span>{{ campaign.iban }}</div>
     <br />
+    <div><span>NIF: </span>{{ campaign.nif }}</div>
+    <br />
 
     <span>Responsibles:</span>
     <li *ngFor="let r of campaign.responsibles; let i = index">
-      <span class="badge">{{ i + 1 }}</span> {{ c }}
+      <span class="badge">{{ r }}</span>
     </li>
   </div>
-    <!-- <button routerLink="/campaign-edit/{{ campaign._id }}">
+  <!-- <button routerLink="/campaign-edit/{{ campaign._id }}">
       Edit
     </button> -->
-  </div>
 </div>

@@ -1,19 +1,29 @@
 <div>
-  <label>Username</label><br />
+  <label>Username:</label>
   <input [(ngModel)]="userData.username" type="text" placeholder="username" />
   <br />
-  <label>Password</label> <br />
+
+  <label>Password:</label>
   <input [(ngModel)]="userData.password" type="text" placeholder="password" />
   <br />
-  <label>Full Name</label><br />
+
+  <label>Full Name:</label>
   <input [(ngModel)]="userData.fullname" type="text" placeholder="fullname" />
   <br />
+
+  <label>IBAN:</label>
+  <input [(ngModel)]="userData.iban" type="text" placeholder="iban" />
+  <br />
+
+  <label>NIF:</label>
+  <input [(ngModel)]="userData.nif" type="number" placeholder="nif" />
+  <br />
+
   <hr />
   <label>Location:</label><br />
   <hr />
   <label>Coordinates:</label><br /><br />
   <label>Latitude:</label>
-
   <input
     [(ngModel)]="userData.coordinates.latitude"
     type="number"
@@ -29,8 +39,8 @@
     placeholder="longitude"
     ng-required="!(userData.address)"
   />
-
   <br />
+
   <hr />
   <label>Address:</label>
   <input

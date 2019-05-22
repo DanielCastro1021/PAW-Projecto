@@ -1,16 +1,19 @@
 <div *ngIf="user">
   <h2>{{ user.fullname | uppercase }} Profile</h2>
   <div><span>Username: </span>{{ user.username }}</div>
-  <div *ngIf="user.coordinates || user.address">
-    <span>Location: </span><br />
-    <div *ngIf="user.coordinates">
-      <span>Coordinates: </span><br />
-      <span>Latitude: </span>{{ user.coordinates.latitude }} <br />
-      <span>Longitude: </span>{{ user.coordinates.longitude }}
-    </div>
-    <div *ngIf="user.address">
-      <span *ngIf="user">Address: </span>{{ user.address }}
-    </div>
+  <div><span>Full Name: </span>{{ user.fullname }}</div>
+  <div><span>NIF: </span>{{ user.nif }}</div>
+  <div><span>IBAN: </span>{{ user.iban }}</div>
+
+  <span>Location: </span><br />
+  <div *ngIf="user.coordinates">
+    <span>Coordinates: </span><br />
+    <span>Latitude: </span>{{ user.coordinates.latitude }} <br />
+    <span>Longitude: </span>{{ user.coordinates.longitude }}
   </div>
+  <div *ngIf="user.address">
+    <span *ngIf="user">Address: </span>{{ user.address }}
+  </div>
+
   <div><button (click)="logOut()">Log Out</button></div>
 </div>

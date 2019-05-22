@@ -23,18 +23,22 @@ const routes: Routes = [
     component: CampaignListComponent
   },
   {
-    path: 'campaign-add',
+    path: 'campaigns-add',
     component: CampaignAddComponent,
     canActivate: [AdminGuard]
   },
   {
-    path: 'campaign-edit/:id',
+    path: 'campaigns-edit/:id',
     component: CampaignEditComponent,
     canActivate: [AdminGuard]
   },
   {
-    path: 'campaign-detail/:id',
+    path: 'campaigns-details/:id',
     component: CampaignDetailsComponent
+  },
+  {
+    path: 'campaigns-edit/:id',
+    component: CampaignEditComponent
   },
   { path: '**', redirectTo: 'campaigns' }
 ];

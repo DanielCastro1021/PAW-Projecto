@@ -25,6 +25,7 @@ export class CampaignListComponent implements OnInit {
     this.campaigns = [];
     this.service.getCampaigns().subscribe((data: {}) => {
       this.campaigns = data;
+      console.log(this.campaigns);
     });
   }
   add() {

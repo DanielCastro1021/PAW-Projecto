@@ -3,6 +3,8 @@ export class User {
   username: string;
   password: string;
   fullname: string;
+  nif: string;
+  iban: string;
   role: string;
   coordinates: Coordinates;
   address: string;

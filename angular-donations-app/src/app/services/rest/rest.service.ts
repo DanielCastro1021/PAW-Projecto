@@ -9,8 +9,8 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { Campaign } from '../../models/Campaign';
 import { Donation } from '../../models/Donation';
 
-const endpointDonations = 'http://localhost:3000/api/v1/donations/';
-const endpointCampaign = 'http://localhost:3000/api/v1/campaigns/';
+const endpointDonations = 'http://localhost:3000/api/v1/donations';
+const endpointCampaign = 'http://localhost:3000/api/v1/campaigns';
 
 const httpOptions = {
   headers: new HttpHeaders({
