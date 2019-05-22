@@ -1,16 +1,22 @@
 <div *ngIf="campaign">
   <h2>{{ campaign.name | uppercase }} Details</h2>
   <div>
-    <span>: </span>
-    <li *ngFor="let c of campaign.contribuiters; let i = index">
+    <div><span>Description: </span>{{ campaign.description }}</div>
+    <br />
+    <div><span>Goal Amount: </span>{{ campaign.goalAmount }}</div>
+    <br />
+    <div><span>Current Amount: </span>{{ campaign.currentAmount }}</div>
+    <br />
+    <div><span>IBAN: </span>{{ campaign.iban }}</div>
+    <br />
+
+    <span>Responsibles:</span>
+    <li *ngFor="let r of campaign.responsibles; let i = index">
       <span class="badge">{{ i + 1 }}</span> {{ c }}
     </li>
   </div>
-
-  <div><span>Quantity: </span>{{ campaign.quantity }}</div>
-  <div>
-    <button routerLink="/campaign-edit/{{ campaign._id }}">
+    <!-- <button routerLink="/campaign-edit/{{ campaign._id }}">
       Edit
-    </button>
+    </button> -->
   </div>
 </div>

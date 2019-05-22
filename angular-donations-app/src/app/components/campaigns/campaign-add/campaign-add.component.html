@@ -1,3 +1,39 @@
-<p>
-  campaign-add works!
-</p>
+<div>
+  <h2>Add Campaign</h2>
+  <div>
+    <label
+      >Name:
+      <input
+        [(ngModel)]="campaignData.name"
+        type="text"
+        placeholder=" name"
+      /> </label
+    ><br />
+    <label
+      >Description:
+      <input
+        [(ngModel)]="campaignData.description"
+        type="text"
+        placeholder=" description"
+      /> </label
+    ><br />
+    <label
+      >Goal Amount:
+      <input
+        [(ngModel)]="campaignData.goalAmount"
+        type="number"
+        placeholder=" goalAmount"
+      /> </label
+    ><br />
+    <label
+      >IBAN:
+      <input
+        [(ngModel)]="campaignData.iban"
+        type="text"
+        maxlength="30"
+        placeholder=" iban"
+      /> </label
+    ><br />
+  </div>
+  <button (click)="addCampaign()">Create campaign</button>
+</div>

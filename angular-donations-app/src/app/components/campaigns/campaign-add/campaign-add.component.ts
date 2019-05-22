@@ -19,7 +19,7 @@ export class CampaignAddComponent implements OnInit {
 
   ngOnInit() {}
 
-  addProduct() {
+  addCampaign() {
     this.service.addCampaign(this.campaignData).subscribe(
       result => {
         this.router.navigate(['/product-details/' + result.__id]);

@@ -5,8 +5,8 @@
     <span>Location: </span><br />
     <div *ngIf="user.coordinates">
       <span>Coordinates: </span><br />
-      <span>Latitude: </span>{{{ user.coordinates.latitude }} <br />
-      <span>Longitude: </span>{{{ user.coordinates.longitude }}
+      <span>Latitude: </span>{{ user.coordinates.latitude }} <br />
+      <span>Longitude: </span>{{ user.coordinates.longitude }}
     </div>
     <div *ngIf="user.address">
       <span *ngIf="user">Address: </span>{{ user.address }}

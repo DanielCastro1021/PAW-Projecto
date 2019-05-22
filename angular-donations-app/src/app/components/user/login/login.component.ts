@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         result => {
           console.log(result);
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/campaigns']);
         },
         err => {
           console.log(err);

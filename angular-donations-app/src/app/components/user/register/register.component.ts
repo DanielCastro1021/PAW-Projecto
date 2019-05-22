@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   @Input() userData: User = new User();
+
   constructor(
     public service: AuthenticationService,
     private route: ActivatedRoute,

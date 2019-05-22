@@ -1,9 +1,45 @@
 <div>
-  <label>Full Name</label>
-  <input [(ngModel)]="userData.name" type="text" placeholder="fullname" />
-  <label>Email</label>
-  <input [(ngModel)]="userData.email" type="text" placeholder="email" />
-  <label>Password</label>
-  <input [(ngModel)]="userData.password" type="text" placeholder="Password" />
+  <label>Username</label><br />
+  <input [(ngModel)]="userData.username" type="text" placeholder="username" />
+  <br />
+  <label>Password</label> <br />
+  <input [(ngModel)]="userData.password" type="text" placeholder="password" />
+  <br />
+  <label>Full Name</label><br />
+  <input [(ngModel)]="userData.fullname" type="text" placeholder="fullname" />
+  <br />
+  <hr />
+  <label>Location:</label><br />
+  <hr />
+  <label>Coordinates:</label><br /><br />
+  <label>Latitude:</label>
+
+  <input
+    [(ngModel)]="userData.coordinates.latitude"
+    type="number"
+    placeholder="latitude"
+    ng-required="!(userData.address)"
+  />
+  <br />
+
+  <label>Longitude:</label>
+  <input
+    [(ngModel)]="userData.coordinates.longitude"
+    type="number"
+    placeholder="longitude"
+    ng-required="!(userData.address)"
+  />
+
+  <br />
+  <hr />
+  <label>Address:</label>
+  <input
+    [(ngModel)]="userData.address"
+    type="text"
+    placeholder="address"
+    ng-required="!(userData.coordinates.latitude && userData.coordinates.longitude)"
+  />
+  <br />
   <button (click)="register()">Register</button>
+  <a routerLink="/login">Sign In</a>
 </div>

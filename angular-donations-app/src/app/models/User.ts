@@ -4,6 +4,14 @@ export class User {
   password: string;
   fullname: string;
   role: string;
-  coordinates: { latitude: number; longitude: number };
+  coordinates: Coordinates;
   address: string;
+  constructor() {
+    this.coordinates = new Coordinates();
+  }
+}
+
+class Coordinates {
+  latitude: number;
+  longitude: number;
 }

@@ -24,14 +24,16 @@ const routes: Routes = [
   },
   {
     path: 'campaign-add',
-    component: CampaignAddComponent
+    component: CampaignAddComponent,
+    canActivate: [AdminGuard]
   },
   {
-    path: 'campaign-edit',
-    component: CampaignEditComponent
+    path: 'campaign-edit/:id',
+    component: CampaignEditComponent,
+    canActivate: [AdminGuard]
   },
   {
-    path: 'campaign-detail',
+    path: 'campaign-detail/:id',
     component: CampaignDetailsComponent
   },
   { path: '**', redirectTo: 'campaigns' }

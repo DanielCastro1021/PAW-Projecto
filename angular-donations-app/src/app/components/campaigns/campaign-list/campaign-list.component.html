@@ -11,6 +11,7 @@
     <a routerLink="/campaigns-details/{{ c_id }}">
       <span class="badge">{{ i + 1 }}</span> {{ c.name }}
     </a>
+
     <button class="delete" title="delete campaign" (click)="delete(c._id)">
       x
     </button>
