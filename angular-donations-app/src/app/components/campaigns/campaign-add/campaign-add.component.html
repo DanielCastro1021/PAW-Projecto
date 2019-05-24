@@ -1,39 +1,92 @@
+<h2>Add Campaign</h2>
 <div>
-  <h2>Add Campaign</h2>
-  <div>
-    <label
-      >Name:
-      <input
-        [(ngModel)]="campaignData.name"
-        type="text"
-        placeholder=" name"
-      /> </label
-    ><br />
-    <label
-      >Description:
-      <input
-        [(ngModel)]="campaignData.description"
-        type="text"
-        placeholder=" description"
-      /> </label
-    ><br />
-    <label
-      >Goal Amount:
-      <input
-        [(ngModel)]="campaignData.goalAmount"
-        type="number"
-        placeholder=" goalAmount"
-      /> </label
-    ><br />
-    <label
-      >IBAN:
-      <input
-        [(ngModel)]="campaignData.iban"
-        type="text"
-        maxlength="30"
-        placeholder=" iban"
-      /> </label
-    ><br />
+  <div class="section1">
+    <label for="name">Name:</label>
+    <input
+      [(ngModel)]="campaignData.name"
+      type="text"
+      maxlength="20"
+      name="name"
+      placeholder=" name"
+    />
+
+    <label *ngIf="showErrorName"
+      >This parameter is empty, it must be filled.</label
+    >
   </div>
-  <button (click)="addCampaign()">Create campaign</button>
+
+  <div class="section2">
+    <label for="description">Description:</label>
+    <input
+      [(ngModel)]="campaignData.description"
+      type="text"
+      maxlength="120"
+      name="description"
+      placeholder=" description"
+    />
+
+    <label *ngIf="showErrorDescription" class="error">
+      <br />
+      This parameter is empty, it must be filled.
+    </label>
+  </div>
+
+  <div class="section3">
+    <label for="goalAmount">Goal Amount($):</label>
+    <input
+      [(ngModel)]="campaignData.goalAmount"
+      type="number"
+      name="goalAmount"
+      placeholder=" goalAmount"
+    />
+    <label *ngIf="showErrorGoalAmount" class="error">
+      <br />
+      Amount must be superior to 0$.
+    </label>
+  </div>
+
+  <div class="section4">
+    <label for="iban">IBAN:</label>
+    <input
+      [(ngModel)]="campaignData.iban"
+      type="text"
+      maxlength="32"
+      name="iban"
+      placeholder=" iban"
+    />
+
+    <label *ngIf="showErrorIBAN" class="error">
+      <br />
+      This parameter is empty, it must be filled.
+    </label>
+  </div>
+
+  <div class="section5">
+    <label for="responsibles">Responsibles:</label>
+
+    <input
+      [(ngModel)]="responsibles[0]"
+      type="text"
+      name="responsibles"
+      placeholder="responsible"
+    />
+
+    <div *ngFor="let i of [1, 2, 3, 4]">
+      <input
+        [(ngModel)]="responsibles[i]"
+        type="text"
+        name="responsibles"
+        placeholder="optional "
+      />
+    </div>
+
+    <label *ngIf="showErrorResponsible" class="error">
+      <br />
+      Must exist at least one responsible.
+    </label>
+  </div>
+
+  <br />
+
+  <button type="submit" (click)="saveCampaing()">Create campaign</button>
 </div>

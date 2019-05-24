@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { RestService } from 'src/app/services/rest/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Campaign } from 'src/app/models/Campaign';
+import { nextContext } from '@angular/core/src/render3';
+import { ElementSchemaRegistry } from '@angular/compiler';
 
 @Component({
   selector: 'app-campaign-add',
@@ -10,6 +12,13 @@ import { Campaign } from 'src/app/models/Campaign';
 })
 export class CampaignAddComponent implements OnInit {
   @Input() campaignData: Campaign = new Campaign();
+  responsibles: any = [];
+
+  private showErrorName = false;
+  private showErrorDescription = false;
+  private showErrorIBAN = false;
+  private showErrorGoalAmount = false;
+  private showErrorResponsible = false;
 
   constructor(
     public service: RestService,
@@ -19,14 +28,117 @@ export class CampaignAddComponent implements OnInit {
 
   ngOnInit() {}
 
-  addCampaign() {
+  /**
+   *
+   */
+  saveCampaing(): void {
+    if (this.validateCampaign()) {
+      this.campaignData.responsibles = this.responsibles;
+      this.serviceAddCampaign();
+    }
+  }
+
+  /**
+   *
+   */
+  serviceAddCampaign(): void {
     this.service.addCampaign(this.campaignData).subscribe(
       result => {
-        this.router.navigate(['/product-details/' + result.__id]);
+        this.router.navigate(['/campaign-details/' + result.__id]);
       },
       err => {
         console.log(err);
       }
     );
+  }
+
+  // Input validation
+
+  /**
+   *
+   */
+  validateCampaign(): boolean {
+    return (
+      this.validateName() &&
+      this.validateDescription() &&
+      this.validateGoalAmount() &&
+      this.validateIBAN() &&
+      this.validateResponsible()
+    );
+  }
+
+  /**
+   *
+   */
+  validateName(): boolean {
+    if (this.campaignData.name === undefined) {
+      this.showErrorName = true;
+      return false;
+    } else {
+      this.showErrorName = false;
+      return this.campaignData.name.length > 0;
+    }
+  }
+
+  /**
+   *
+   */
+  validateDescription(): boolean {
+    if (this.campaignData.description === undefined) {
+      this.showErrorDescription = true;
+      return false;
+    } else {
+      this.showErrorDescription = false;
+      return this.campaignData.description.length > 0;
+    }
+  }
+
+  /**
+   *
+   */
+  validateGoalAmount(): boolean {
+    if (this.campaignData.goalAmount === undefined) {
+      this.showErrorGoalAmount = true;
+      return false;
+    } else {
+      this.showErrorGoalAmount = false;
+      return this.campaignData.goalAmount > 0;
+    }
+  }
+
+  /**
+   *
+   */
+  validateIBAN(): boolean {
+    if (this.campaignData.iban === undefined) {
+      this.showErrorIBAN = true;
+      return false;
+    } else {
+      this.showErrorIBAN = false;
+      return this.campaignData.iban.length > 0;
+    }
+  }
+
+  /**
+   *
+   */
+  validateResponsible(): boolean {
+    this.removeSpaces();
+    if (this.responsibles === undefined || this.responsibles.length === 0) {
+      this.showErrorResponsible = true;
+      return false;
+    } else {
+      this.showErrorResponsible = false;
+      return true;
+    }
+  }
+
+  /**
+   *
+   */
+  removeSpaces(): void {
+    this.responsibles = this.responsibles.filter(str => {
+      return /\S/.test(str);
+    });
   }
 }
