@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 var donationSchema = new Schema(
   {
     username: { type: String, required: true },
-    campaign: { type: String, required: true },
+    campaign: { type: Schema.Types.ObjectId, required: true },
     amount: { type: Number, min: 0.1, required: true },
-    status: { type: String, required: true, default: 'in processing' }
+    status: { type: String, default: 'in processing' }
   },
   { collection: 'donationCollection' }
 );

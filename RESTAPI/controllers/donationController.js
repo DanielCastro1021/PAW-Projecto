@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
 var Donation = require('../models/Donation');
-var Campaign = require('../models/Campaign');
-var User = require('../models/User');
 
 var donationController = {};
 
@@ -64,6 +62,129 @@ donationController.getAllDonations = (req, res, next) => {
       res.json(donations);
     }
   });
+};
+
+donationController.getProcessedDonations = (req, res, next) => {
+  Donation.find({ status: 'processed' }, (err, donations) => {
+    if (err) {
+      next(err);
+    } else {
+      res.json(donations);
+    }
+  });
+};
+
+donationController.getInProcessedDonations = (req, res, next) => {
+  Donation.find({ status: 'in processing' }, (err, donations) => {
+    if (err) {
+      next(err);
+    } else {
+      res.json(donations);
+    }
+  });
+};
+
+donationController.getCanceledDonations = (req, res, next) => {
+  Donation.find({ status: 'canceled' }, (err, donations) => {
+    if (err) {
+      next(err);
+    } else {
+      res.json(donations);
+    }
+  });
+};
+
+donationController.getCampaignDonations = (req, res, next) => {
+  Donation.find(
+    { campaing: req.body.id, status: 'processed' },
+    (err, donations) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(donations);
+      }
+    }
+  );
+};
+
+//USER
+donationController.getUserDonations = (req, res, next) => {
+  Donation.find(
+    { username: req.params.username, status: 'processed' },
+    (err, donations) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(donations);
+      }
+    }
+  );
+};
+
+donationController.getTotalSpentPerUser = (req, res, next) => {
+  Donation.aggregate(
+    [{ $group: { _id: '$username', total: { $sum: '$amount' } } }],
+    (err, results) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(results);
+      }
+    }
+  );
+};
+
+donationController.getCountDonationsPerUser = (req, res, next) => {
+  Donation.aggregate(
+    [{ $group: { _id: '$username', total: { $sum: 1 } } }],
+    (err, results) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(results);
+      }
+    }
+  );
+};
+
+//DASHBOARD
+donationController.getSummaryStatus = (req, res, next) => {
+  Donation.aggregate(
+    [{ $group: { _id: '$status', total: { $sum: 1 } } }],
+    (err, results) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(results);
+      }
+    }
+  );
+};
+
+donationController.getSummaryCount = (req, res, next) => {
+  Donation.aggregate(
+    [{ $group: { _id: null, total: { $sum: 1 } } }],
+    (err, results) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(results);
+      }
+    }
+  );
+};
+
+donationController.getSummaryTotalAmount = (req, res, next) => {
+  Donation.aggregate(
+    [{ $group: { _id: null, total: { $sum: '$amount' } } }],
+    (err, results) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(results);
+      }
+    }
+  );
 };
 
 module.exports = donationController;

@@ -11,7 +11,7 @@ var User = require('../models/User');
  */
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var bcrypt = require('bcryptjs');
-var config = require('../config/config'); // get config file
+var config = require('../config/jwt'); // get config file
 
 var authController = {};
 

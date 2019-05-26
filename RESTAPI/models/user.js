@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var UserSchema = new mongoose.Schema(
   {
     username: { type: String, unique: true, required: true },
-    password: { type: String },
+    password: { type: String, required: true },
     fullname: { type: String, required: true },
     nif: { type: Number, min: 100000000, max: 999999999, required: true },
     iban: { type: String, required: true },

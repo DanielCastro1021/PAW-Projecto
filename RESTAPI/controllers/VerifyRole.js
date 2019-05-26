@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-var config = require('../config/config'); // get our config file
+var config = require('../config/jwt'); // get our config file
 
 function verifyRole(req, res, next) {
   var role = req.headers['role'];
