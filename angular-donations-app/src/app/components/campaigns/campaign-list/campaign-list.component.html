@@ -1,19 +1,26 @@
-<h2>Our Campaigns</h2>
+<div *ngIf="campaigns">
+  <h2>Our Campaigns</h2>
 
-<div>
-  <button (click)="add()">
-    Add
-  </button>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Current Amount</th>
+      <th>Goal Amount</th>
+    </tr>
+    <tr *ngFor="let c of campaigns; let i = index">
+      <td>
+        <a routerLink="/campaign-details/{{ c._id }}">
+          {{ c.name }}
+        </a>
+      </td>
+      <td>{{ c.description }}</td>
+      <td>{{ c.currentAmount }}</td>
+      <td>{{ c.goalAmount }}</td>
+    </tr>
+  </table>
 </div>
 
-<ul class="campaigns">
-  <li *ngFor="let c of campaigns; let i = index">
-    <a routerLink="/campaigns-details/{{ c._id }}">
-      <span class="badge">{{ i + 1 }}</span> {{ c.name }}
-    </a>
-
-    <button class="delete" title="delete campaign" (click)="delete(c._id)">
-      x
-    </button>
-  </li>
-</ul>
+<div *ngIf="!campaigns">
+  <p>No available campaigns at the moment, check out later.</p>
+</div>

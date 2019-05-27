@@ -1,7 +1,7 @@
 export class Donation {
   __id: string;
   username: string;
-  campain: string;
+  campaign: string;
   amount: number;
   state: string;
 }

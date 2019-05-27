@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Campaign } from 'src/app/models/Campaign';
-import { RestService } from 'src/app/services/rest/rest.service';
+import { RestCampaignsService } from 'src/app/services/rest/rest-campaigns.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,37 +9,21 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./campaign-list.component.css']
 })
 export class CampaignListComponent implements OnInit {
-  campaigns: any = [];
+  campaigns: any;
 
-  constructor(
-    public service: RestService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(public service: RestCampaignsService) {}
 
   ngOnInit() {
     this.getCampaigns();
   }
 
+  /**
+   *
+   */
   getCampaigns() {
-    this.campaigns = [];
-    this.service.getCampaigns().subscribe((data: {}) => {
+    this.service.getActiveCampaigns().subscribe((data: {}) => {
+      this.campaigns = [];
       this.campaigns = data;
-      console.log(this.campaigns);
     });
-  }
-  add() {
-    this.router.navigate(['/campaign-add']);
-  }
-
-  delete(id) {
-    this.service.deleteCampaign(id).subscribe(
-      res => {
-        this.getCampaigns();
-      },
-      err => {
-        console.log(err);
-      }
-    );
   }
 }

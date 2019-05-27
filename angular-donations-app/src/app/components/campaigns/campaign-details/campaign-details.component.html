@@ -1,23 +1,44 @@
 <div *ngIf="campaign">
-  <h2>Details of {{ campaign.name | uppercase }</h2>
+  <h2>Details of {{ campaign.name | uppercase }}</h2>
   <div>
-    <div><span>Description: </span>{{ campaign.description }}</div>
+    <p>Description: {{ campaign.description }}</p>
     <br />
-    <div><span>Goal Amount: </span>{{ campaign.goalAmount }}</div>
-    <br />
-    <div><span>Current Amount: </span>{{ campaign.currentAmount }}</div>
-    <br />
-    <div><span>IBAN: </span>{{ campaign.iban }}</div>
-    <br />
-    <div><span>NIF: </span>{{ campaign.nif }}</div>
+    <p>Goal Amount: {{ campaign.goalAmount }} $</p>
+    <p>Current Amount: {{ campaign.currentAmount }} $</p>
     <br />
 
-    <span>Responsibles:</span>
-    <li *ngFor="let r of campaign.responsibles; let i = index">
-      <span class="badge">{{ r }}</span>
-    </li>
+    <div>
+      <p>Responsibles:</p>
+      <ul *ngFor="let r of campaign.responsibles; let i = index">
+        <li>{{ r }}</li>
+      </ul>
+    </div>
+
+    <!--   TODO: MOVE THIS DIV TO THE CORRECT COMPONENT -->
+    <div *ngIf="donations">
+      <p>Donations:</p>
+      <br />
+      <ul *ngFor="let d of donations; let j = index">
+        <li>Username: {{ d.username }}</li>
+        <li>Amount: {{ d.amount }} $</li>
+        <br />
+      </ul>
+    </div>
+
+    <div>
+      <button routerLink="/campaign-edit/{{ campaign._id }}">
+        Edit
+      </button>
+      <button *ngIf="!donations" (click)="deleteCampain(campaign._id)">
+        Delete
+      </button>
+      <button *ngIf="donations" (click)="deactivateCampain(campaign._id)">
+        Deactivate
+      </button>
+    </div>
   </div>
-  <!-- <button routerLink="/campaign-edit/{{ campaign._id }}">
-      Edit
-    </button> -->
+
+  <div *ngIf="!campaign">
+    <p>Sorry a problem occurred.</p>
+  </div>
 </div>

@@ -1,9 +1,7 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { RestService } from 'src/app/services/rest/rest.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { RestCampaignsService } from 'src/app/services/rest/rest-campaigns.service';
+import { Router } from '@angular/router';
 import { Campaign } from 'src/app/models/Campaign';
-import { nextContext } from '@angular/core/src/render3';
-import { ElementSchemaRegistry } from '@angular/compiler';
 
 @Component({
   selector: 'app-campaign-add',
@@ -12,6 +10,7 @@ import { ElementSchemaRegistry } from '@angular/compiler';
 })
 export class CampaignAddComponent implements OnInit {
   @Input() campaignData: Campaign = new Campaign();
+  @Input() image: File;
   responsibles: any = [];
 
   private showErrorName = false;
@@ -20,18 +19,14 @@ export class CampaignAddComponent implements OnInit {
   private showErrorGoalAmount = false;
   private showErrorResponsible = false;
 
-  constructor(
-    public service: RestService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(public service: RestCampaignsService, private router: Router) {}
 
   ngOnInit() {}
 
   /**
    *
    */
-  saveCampaing(): void {
+  saveCampaign(): void {
     if (this.validateCampaign()) {
       this.campaignData.responsibles = this.responsibles;
       this.serviceAddCampaign();
@@ -51,8 +46,6 @@ export class CampaignAddComponent implements OnInit {
       }
     );
   }
-
-  // Input validation
 
   /**
    *
@@ -115,6 +108,7 @@ export class CampaignAddComponent implements OnInit {
       return false;
     } else {
       this.showErrorIBAN = false;
+      this.campaignData.iban = this.campaignData.iban.toUpperCase();
       return this.campaignData.iban.length > 0;
     }
   }

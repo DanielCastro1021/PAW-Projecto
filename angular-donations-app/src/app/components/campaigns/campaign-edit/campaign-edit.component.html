@@ -1,3 +1,76 @@
-<p>
-  campaign-edit works!
-</p>
+<div *ngIf="campaignData">
+  <h2>Profile of "{{ campaignData.name }}"</h2>
+
+  <label for="name">Name:</label>
+  <input
+    [(ngModel)]="campaignData.name"
+    type="text"
+    maxlength="20"
+    name="name"
+    placeholder="name"
+  />
+  <label *ngIf="showErrorName"
+    >This parameter is empty, it must be filled.</label
+  >
+
+  <label for="description">Description:</label>
+  <input
+    [(ngModel)]="campaignData.description"
+    type="text"
+    maxlength="120"
+    name="description"
+    placeholder="description"
+  />
+  <label *ngIf="showErrorDescription" class="error">
+    <br />
+    This parameter is empty, it must be filled.
+  </label>
+
+  <label for="goalAmount">Goal Amount ($) :</label>
+  <input
+    [(ngModel)]="campaignData.goalAmount"
+    type="number"
+    name="goalAmount"
+    placeholder="goalAmount"
+  />
+  <label *ngIf="showErrorGoalAmount" class="error">
+    <br />
+    Amount must be superior to 0$.
+  </label>
+
+  <label for="iban">IBAN:</label>
+  <input
+    [(ngModel)]="campaignData.iban"
+    type="text"
+    maxlength="32"
+    name="iban"
+    placeholder="iban"
+  />
+  <label *ngIf="showErrorIBAN" class="error">
+    <br />
+    This parameter is empty, it must be filled.
+  </label>
+  <br />
+  <label for="responsibles">Responsibles:</label>
+  <input
+    [(ngModel)]="campaignData.responsibles[0]"
+    type="text"
+    name="responsibles"
+    placeholder="responsible"
+  />
+
+  <input
+    *ngFor="let i of [1, 2, 3, 4]"
+    [(ngModel)]="campaignData.responsibles[i]"
+    type="text"
+    name="responsibles"
+    placeholder="optional "
+  />
+
+  <label *ngIf="showErrorResponsible" class="error">
+    <br />
+    Must exist at least one responsible.
+  </label>
+
+  <button type="submit" (click)="updateCampaign()">Save</button>
+</div>

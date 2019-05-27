@@ -4,6 +4,8 @@ export class Campaign {
   description: string;
   goalAmount: number;
   currentAmount: number;
-  iban: number;
+  iban: string;
   responsibles: [string];
+  status: string;
+  logo: string;
 }
