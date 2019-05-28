@@ -75,15 +75,17 @@ campaignController.getAllActiveCampaigns = (req, res, next) => {
   });
 };
 
-campaignController.getOneActiveCampaigns = (req, res, next, id) => {
-  Campaign.findOne({ _id: id, status: 'active' }, (err, campaign) => {
-    if (err) {
-      next(err);
-    } else {
-      console.log(campaign);
-      res.json(campaign);
+campaignController.getOneActiveCampaigns = (req, res, next) => {
+  Campaign.findOne(
+    { _id: req.params.campaignId, status: 'active' },
+    (err, campaign) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(campaign);
+      }
     }
-  });
+  );
 };
 
 campaignController.getAllDisabledCampaigns = (req, res, next) => {
@@ -96,15 +98,18 @@ campaignController.getAllDisabledCampaigns = (req, res, next) => {
   });
 };
 
-campaignController.getOneDisabledCampaigns = (req, res, next, id) => {
-  Campaign.findOne({ _id: id, status: 'disabled' }, (err, campaign) => {
-    if (err) {
-      next(err);
-    } else {
-      console.log(campaign);
-      res.json(campaign);
+campaignController.getOneDisabledCampaigns = (req, res, next) => {
+  Campaign.findOne(
+    { _id: req.params.campaignId, status: 'disabled' },
+    (err, campaign) => {
+      if (err) {
+        next(err);
+      } else {
+        console.log(campaign);
+        res.json(campaign);
+      }
     }
-  });
+  );
 };
 
 campaignController.getCampaignTotal = (req, res, next) => {

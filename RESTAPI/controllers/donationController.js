@@ -96,7 +96,7 @@ donationController.getCanceledDonations = (req, res, next) => {
 
 donationController.getCampaignDonations = (req, res, next) => {
   Donation.find(
-    { campaing: req.body.id, status: 'processed' },
+    { campaign: req.params.campaign, status: 'processed' },
     (err, donations) => {
       if (err) {
         next(err);
