@@ -10,7 +10,7 @@ import { Campaign } from 'src/app/models/Campaign';
 })
 export class CampaignAddComponent implements OnInit {
   @Input() campaignData: Campaign = new Campaign();
-  @Input() image: File;
+
   responsibles: any = [];
 
   private showErrorName = false;
@@ -39,7 +39,7 @@ export class CampaignAddComponent implements OnInit {
   serviceAddCampaign(): void {
     this.service.addCampaign(this.campaignData).subscribe(
       result => {
-        this.router.navigate(['/campaign-details/' + result.__id]);
+        this.router.navigate(['/campaign-details/' + result._id]);
       },
       err => {
         console.log(err);

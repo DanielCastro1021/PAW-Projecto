@@ -68,13 +68,14 @@ export class RestCampaignsService {
 
   /**
    *
-   * @param campaign
+   * @param Campaign
    */
-  addCampaign(campaign: Campaign): Observable<Campaign> {
+  addCampaign(Campaign): Observable<Campaign> {
+    console.log(Campaign);
     return this.http
-      .post<any>(endpoint, JSON.stringify(campaign), httpOptions)
+      .post<any>(endpoint, JSON.stringify(Campaign), httpOptions)
       .pipe(
-        tap(campaign => console.log(`added Campaign w/ id=${campaign.id}`)),
+        tap(Campaign => console.log(`added Campaign w/ id=${Campaign.id}`)),
         catchError(this.handleError<any>('addCampaign'))
       );
   }
@@ -82,11 +83,11 @@ export class RestCampaignsService {
   /**
    *
    * @param id
-   * @param campaign
+   * @param Campaign
    */
-  updateCampaign(id: string, campaign: Campaign): Observable<Campaign> {
+  updateCampaign(id, Campaign): Observable<Campaign> {
     return this.http
-      .put(endpoint + '/' + id, JSON.stringify(campaign), httpOptions)
+      .put(endpoint + '/' + id, JSON.stringify(Campaign), httpOptions)
       .pipe(
         tap(_ => console.log(`updated Campaign id=${id}`)),
         catchError(this.handleError<any>('updateCampaign'))
@@ -97,7 +98,7 @@ export class RestCampaignsService {
    *
    * @param id
    */
-  deleteCampaign(id: string): Observable<Campaign> {
+  deleteCampaign(id): Observable<Campaign> {
     return this.http.delete<any>(endpoint + '/' + id, httpOptions).pipe(
       tap(_ => console.log(`deleted Campaign id=${id}`)),
       catchError(this.handleError<any>('deleteCampaign'))

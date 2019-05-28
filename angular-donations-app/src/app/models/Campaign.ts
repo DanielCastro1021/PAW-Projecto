@@ -1,5 +1,5 @@
 export class Campaign {
-  __id: string;
+  _id: string;
   name: string;
   description: string;
   goalAmount: number;

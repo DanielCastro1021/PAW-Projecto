@@ -32,7 +32,6 @@ export class CampaignEditComponent implements OnInit {
 
   ngOnInit() {
     this.serviceInitializeCampaign();
-    console.log(this.campaignData);
   }
 
   /**
@@ -51,7 +50,6 @@ export class CampaignEditComponent implements OnInit {
     this.service
       .getActiveCampaign(this.route.snapshot.params['id'])
       .subscribe((data: {}) => {
-        console.log(data);
         this.campaignData = data;
       });
   }
@@ -64,7 +62,8 @@ export class CampaignEditComponent implements OnInit {
       .updateCampaign(this.route.snapshot.params['id'], this.campaignData)
       .subscribe(
         result => {
-          this.router.navigate(['/campaign-details/' + result.__id]);
+          console.log(result);
+          this.router.navigate(['/campaign-details/' + result._id]);
         },
         err => {
           console.log(err);

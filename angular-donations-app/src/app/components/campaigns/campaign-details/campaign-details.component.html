@@ -26,14 +26,29 @@
     </div>
 
     <div>
+      <button
+        *ngIf="campaign.status == 'disabled'"
+        (click)="activateCampaign(campaign._id)"
+      >
+        Activate
+      </button>
+
+      <button
+        *ngIf="donations && campaign.status == 'active'"
+        (click)="deactivateCampaign(campaign._id)"
+      >
+        Deactivate
+      </button>
+
       <button routerLink="/campaign-edit/{{ campaign._id }}">
         Edit
       </button>
-      <button *ngIf="!donations" (click)="deleteCampain(campaign._id)">
+      <button
+        style="background-color: red"
+        *ngIf="!donations"
+        (click)="deleteCampaign(campaign._id)"
+      >
         Delete
-      </button>
-      <button *ngIf="donations" (click)="deactivateCampain(campaign._id)">
-        Deactivate
       </button>
     </div>
   </div>
