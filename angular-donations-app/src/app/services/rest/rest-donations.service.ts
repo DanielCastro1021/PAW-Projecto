@@ -11,6 +11,7 @@ const httpOptions = {
     'Content-Type': 'application/json'
   })
 };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,8 +22,8 @@ export class RestDonationsService {
    *
    * @param id
    */
-  getDonations(id: string): Observable<Donation[]> {
-    return this.http.get<Donation[]>(endpoint + '/campaign/' + id);
+  getDonations(): Observable<Donation[]> {
+    return this.http.get<Donation[]>(endpoint);
   }
 
   /**
@@ -35,14 +36,34 @@ export class RestDonationsService {
 
   /**
    *
+   */
+  getProcessedDonations(): Observable<Donation[]> {
+    return this.http.get<Donation[]>(endpoint + '/processed');
+  }
+
+  /**
+   *
+   */
+  getInProcessingDonations(): Observable<Donation[]> {
+    return this.http.get<Donation[]>(endpoint + '/in-processing');
+  }
+  /**
+   *
+   */
+  getCanceledDonations(): Observable<Donation[]> {
+    return this.http.get<Donation[]>(endpoint + '/canceled');
+  }
+
+  /**
+   *
    * @param donation
    */
-  addDonation(donation: Donation): Observable<Donation> {
+  addDonation(Donation): Observable<Donation> {
     console.log(Donation);
     return this.http
-      .post<Donation>(endpoint, JSON.stringify(donation), httpOptions)
+      .post<Donation>(endpoint, JSON.stringify(Donation), httpOptions)
       .pipe(
-        tap(donation => console.log(`added Donation w/ id=${donation._id}`)),
+        tap(Donation => console.log(`added Donation w/ id=${Donation._id}`)),
         catchError(this.handleError<any>('addDonation'))
       );
   }
@@ -78,6 +99,14 @@ export class RestDonationsService {
    */
   getCampaignDonations(id: string): Observable<Donation[]> {
     return this.http.get<Donation[]>(endpoint + '/campaign/' + id);
+  }
+
+  /**
+   *
+   * @param id
+   */
+  getUserDonations(id: string): Observable<Donation[]> {
+    return this.http.get<Donation[]>(endpoint + '/user/' + id);
   }
 
   /**

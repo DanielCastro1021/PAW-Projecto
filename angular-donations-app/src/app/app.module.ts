@@ -12,6 +12,9 @@ import { JwtInterceptor } from './helper/jwt.interceptor';
 import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
+import { DonationsListComponent } from './components/donations/donations-list/donations-list.component';
+import { DonationsAddComponent } from './components/donations/donations-add/donations-add.component';
+import { DonationsDetailsComponent } from './components/donations/donations-details/donations-details.component';
 import { CampaignListComponent } from './components/dashboard/campaigns/campaign-list/campaign-list.component';
 import { CampaignAddComponent } from './components/dashboard/campaigns/campaign-add/campaign-add.component';
 import { CampaignDetailsComponent } from './components/dashboard/campaigns/campaign-details/campaign-details.component';
@@ -27,6 +30,9 @@ import { NavBarComponent } from './components/dashboard/nav-bar/nav-bar.componen
     CampaignListComponent,
     CampaignAddComponent,
     CampaignDetailsComponent,
+    DonationsListComponent,
+    DonationsAddComponent,
+    DonationsDetailsComponent
     CampaignEditComponent,
     NavBarComponent
   ],
