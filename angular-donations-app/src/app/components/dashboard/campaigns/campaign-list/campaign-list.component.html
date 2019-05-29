@@ -1,20 +1,3 @@
-<nav>
-  <ul class="navbar">
-    <li>
-      <a class="active" (click)="getActiveCampaigns()"> Active Campaigns</a>
-    </li>
-    <li><a (click)="getDisabledCampaigns()">Disabled Campaigns</a></li>
-    <li><a (click)="getAllCampaigns()">All Campaigns</a></li>
-  </ul>
-</nav>
-<!-- <nav class=".navbar">
-  <button class="active" (click)="getActiveCampaigns()">
-    Active Campaigns
-  </button>
-  <button (click)="getDisabledCampaigns()">Disabled Campaigns</button>
-  <button (click)="getAllCampaigns()">All Campaigns</button>
-</nav> -->
-
 <div *ngIf="campaigns">
   <h2>{{ title }}</h2>
   <table>
@@ -23,6 +6,7 @@
       <th>Description</th>
       <th>Current Amount</th>
       <th>Goal Amount</th>
+      <th *ngIf="showStatus">Status</th>
     </tr>
     <tr *ngFor="let c of campaigns; let i = index">
       <td>
@@ -33,6 +17,7 @@
       <td>{{ c.description }}</td>
       <td>{{ c.currentAmount }}</td>
       <td>{{ c.goalAmount }}</td>
+      <td *ngIf="showStatus">{{ c.status }}</td>
     </tr>
   </table>
 </div>

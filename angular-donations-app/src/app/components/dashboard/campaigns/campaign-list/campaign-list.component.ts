@@ -3,6 +3,7 @@ import { Campaign } from 'src/app/models/Campaign';
 import { RestCampaignsService } from 'src/app/services/rest/rest-campaigns.service';
 import { RestDonationsService } from 'src/app/services/rest/rest-donations.service';
 import { Donation } from 'src/app/models/Donation';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-campaign-list',
@@ -12,14 +13,28 @@ import { Donation } from 'src/app/models/Donation';
 export class CampaignListComponent implements OnInit {
   campaigns: Campaign[];
   title: string;
+  showStatus: boolean;
 
   constructor(
     public service: RestCampaignsService,
-    public service2: RestDonationsService
+    public service2: RestDonationsService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.getActiveCampaigns();
+    this.route.params.subscribe(params => {
+      switch (params['status']) {
+        case 'active':
+          this.getActiveCampaigns();
+          break;
+        case 'disabled':
+          this.getDisabledCampaigns();
+          break;
+        case 'all':
+          this.getAllCampaigns();
+          break;
+      }
+    });
   }
 
   getAllCampaigns() {
@@ -30,6 +45,7 @@ export class CampaignListComponent implements OnInit {
       for (let i = 0; i < this.campaigns.length; i++) {
         this.getCampaignsCurrentAmount(this.campaigns[i]);
       }
+      this.showStatus = true;
     });
   }
 
@@ -44,6 +60,7 @@ export class CampaignListComponent implements OnInit {
       for (let i = 0; i < this.campaigns.length; i++) {
         this.getCampaignsCurrentAmount(this.campaigns[i]);
       }
+      this.showStatus = false;
     });
   }
 
@@ -58,6 +75,7 @@ export class CampaignListComponent implements OnInit {
       for (let i = 0; i < this.campaigns.length; i++) {
         this.getCampaignsCurrentAmount(this.campaigns[i]);
       }
+      this.showStatus = false;
     });
   }
 

@@ -1,92 +1,52 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RestCampaignsService } from 'src/app/services/rest/rest-campaigns.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { Campaign } from 'src/app/models/Campaign';
 
 @Component({
-  selector: 'app-campaign-edit',
-  templateUrl: './campaign-edit.component.html',
-  styleUrls: ['./campaign-edit.component.css']
+  selector: 'app-campaign-add',
+  templateUrl: './campaign-add.component.html',
+  styleUrls: ['./campaign-add.component.css']
 })
-export class CampaignEditComponent implements OnInit {
-  @Input() campaignData: any = {
-    name: '',
-    description: '',
-    goalAmount: 0,
-    iban: '',
-    responsibles: [],
-    logo: ''
-  };
-  @Input() logo: File;
+export class CampaignAddComponent implements OnInit {
+  @Input() campaignData: Campaign = new Campaign();
 
-  showErrorName = false;
-  showErrorDescription = false;
-  showErrorIBAN = false;
-  showErrorGoalAmount = false;
-  showErrorResponsible = false;
+  responsibles: any = [];
 
-  constructor(
-    public service: RestCampaignsService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  private showErrorName = false;
+  private showErrorDescription = false;
+  private showErrorIBAN = false;
+  private showErrorGoalAmount = false;
+  private showErrorResponsible = false;
 
-  ngOnInit() {
-    this.serviceInitializeCampaign();
-  }
+  constructor(public service: RestCampaignsService, private router: Router) {}
 
-  /**
-   *
-   */
-  updateCampaign(): void {
+  ngOnInit() {}
+
+  saveCampaign(): void {
     if (this.validateCampaign()) {
-      this.serviceUpdateCampaign();
-    }
-  }
-
-  /**
-   *
-   */
-  serviceInitializeCampaign(): void {
-    this.service
-      .getActiveCampaign(this.route.snapshot.params['id'])
-      .subscribe((data: {}) => {
-        this.campaignData = data;
-      });
-  }
-
-  /**
-   *
-   */
-  serviceUpdateCampaign(): void {
-    this.service
-      .updateCampaign(this.route.snapshot.params['id'], this.campaignData)
-      .subscribe(
+      this.campaignData.responsibles = this.responsibles;
+      this.service.addCampaign(this.campaignData).subscribe(
         result => {
-          console.log(result);
           this.router.navigate(['/campaign-details/' + result._id]);
         },
         err => {
           console.log(err);
         }
       );
+    }
   }
 
-  /**
-   *
-   */
   validateCampaign(): boolean {
     return (
       this.validateName() &&
       this.validateDescription() &&
       this.validateGoalAmount() &&
       this.validateIBAN() &&
-      this.validateResponsibles()
+      this.validateResponsible()
     );
   }
 
-  /**
-   *
-   */
   validateName(): boolean {
     if (this.campaignData.name === undefined) {
       this.showErrorName = true;
@@ -97,9 +57,6 @@ export class CampaignEditComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
   validateDescription(): boolean {
     if (this.campaignData.description === undefined) {
       this.showErrorDescription = true;
@@ -110,9 +67,6 @@ export class CampaignEditComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
   validateGoalAmount(): boolean {
     if (this.campaignData.goalAmount === undefined) {
       this.showErrorGoalAmount = true;
@@ -123,9 +77,6 @@ export class CampaignEditComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
   validateIBAN(): boolean {
     if (this.campaignData.iban === undefined) {
       this.showErrorIBAN = true;
@@ -137,15 +88,9 @@ export class CampaignEditComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
-  validateResponsibles(): boolean {
+  validateResponsible(): boolean {
     this.removeSpaces();
-    if (
-      this.campaignData.responsibles === undefined ||
-      this.campaignData.length === 0
-    ) {
+    if (this.responsibles === undefined || this.responsibles.length === 0) {
       this.showErrorResponsible = true;
       return false;
     } else {
@@ -154,15 +99,9 @@ export class CampaignEditComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
   removeSpaces(): void {
-    this.campaignData.responsibles = this.campaignData.responsibles.filter(
-      str => {
-        return /\S/.test(str);
-      }
-    );
-    console.log(this.campaignData.responsibles);
+    this.responsibles = this.responsibles.filter(str => {
+      return /\S/.test(str);
+    });
   }
 }

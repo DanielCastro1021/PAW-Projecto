@@ -1,3 +1,5 @@
+<li><a routerLink="/campaigns">Campaigns</a></li>
+
 <div *ngIf="campaign">
   <h2>Details of {{ campaign.name | uppercase }}</h2>
   <div>
@@ -14,7 +16,6 @@
       </ul>
     </div>
 
-    <!--   TODO: MOVE THIS DIV TO THE CORRECT COMPONENT -->
     <div *ngIf="donations">
       <p>Donations:</p>
       <br />

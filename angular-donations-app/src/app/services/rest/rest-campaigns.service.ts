@@ -70,10 +70,9 @@ export class RestCampaignsService {
    *
    * @param Campaign
    */
-  addCampaign(Campaign): Observable<Campaign> {
-    console.log(Campaign);
+  addCampaign(campaign): Observable<Campaign> {
     return this.http
-      .post<any>(endpoint, JSON.stringify(Campaign), httpOptions)
+      .post<any>(endpoint, JSON.stringify(campaign), httpOptions)
       .pipe(
         tap(Campaign => console.log(`added Campaign w/ id=${Campaign.id}`)),
         catchError(this.handleError<any>('addCampaign'))
@@ -85,9 +84,9 @@ export class RestCampaignsService {
    * @param id
    * @param Campaign
    */
-  updateCampaign(id, Campaign): Observable<Campaign> {
+  updateCampaign(id, campaign): Observable<Campaign> {
     return this.http
-      .put(endpoint + '/' + id, JSON.stringify(Campaign), httpOptions)
+      .put(endpoint + '/' + id, JSON.stringify(campaign), httpOptions)
       .pipe(
         tap(_ => console.log(`updated Campaign id=${id}`)),
         catchError(this.handleError<any>('updateCampaign'))

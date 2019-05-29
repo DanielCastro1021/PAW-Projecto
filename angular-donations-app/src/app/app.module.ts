@@ -12,10 +12,11 @@ import { JwtInterceptor } from './helper/jwt.interceptor';
 import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
-import { CampaignListComponent } from './components/campaigns/campaign-list/campaign-list.component';
-import { CampaignAddComponent } from './components/campaigns/campaign-add/campaign-add.component';
-import { CampaignDetailsComponent } from './components/campaigns/campaign-details/campaign-details.component';
-import { CampaignEditComponent } from './components/campaigns/campaign-edit/campaign-edit.component';
+import { CampaignListComponent } from './components/dashboard/campaigns/campaign-list/campaign-list.component';
+import { CampaignAddComponent } from './components/dashboard/campaigns/campaign-add/campaign-add.component';
+import { CampaignDetailsComponent } from './components/dashboard/campaigns/campaign-details/campaign-details.component';
+import { CampaignEditComponent } from './components/dashboard/campaigns/campaign-edit/campaign-edit.component';
+import { NavBarComponent } from './components/dashboard/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CampaignEditComponent } from './components/campaigns/campaign-edit/camp
     CampaignListComponent,
     CampaignAddComponent,
     CampaignDetailsComponent,
-    CampaignEditComponent
+    CampaignEditComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

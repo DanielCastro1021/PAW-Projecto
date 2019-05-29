@@ -60,7 +60,8 @@ export class CampaignDetailsComponent implements OnInit {
   serviceUpdateCampaign(id: string) {
     this.service.updateCampaign(id, this.campaign).subscribe(
       res => {
-        this.router.navigate(['/campaigns']);
+        console.log(res);
+        this.router.navigate(['/campaign-details/' + res._id]);
       },
       err => {
         console.log(err);

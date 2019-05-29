@@ -1,68 +1,76 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RestCampaignsService } from 'src/app/services/rest/rest-campaigns.service';
-import { Router } from '@angular/router';
-import { Campaign } from 'src/app/models/Campaign';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-campaign-add',
-  templateUrl: './campaign-add.component.html',
-  styleUrls: ['./campaign-add.component.css']
+  selector: 'app-campaign-edit',
+  templateUrl: './campaign-edit.component.html',
+  styleUrls: ['./campaign-edit.component.css']
 })
-export class CampaignAddComponent implements OnInit {
-  @Input() campaignData: Campaign = new Campaign();
+export class CampaignEditComponent implements OnInit {
+  @Input() campaignData: any = {
+    name: '',
+    description: '',
+    goalAmount: 0,
+    iban: '',
+    responsibles: []
+  };
+  @Input() logo: File;
 
-  responsibles: any = [];
+  showErrorName = false;
+  showErrorDescription = false;
+  showErrorIBAN = false;
+  showErrorGoalAmount = false;
+  showErrorResponsible = false;
 
-  private showErrorName = false;
-  private showErrorDescription = false;
-  private showErrorIBAN = false;
-  private showErrorGoalAmount = false;
-  private showErrorResponsible = false;
+  constructor(
+    public service: RestCampaignsService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  constructor(public service: RestCampaignsService, private router: Router) {}
+  ngOnInit() {
+    this.serviceInitializeCampaign();
+  }
 
-  ngOnInit() {}
-
-  /**
-   *
-   */
-  saveCampaign(): void {
+  updateCampaign(): void {
     if (this.validateCampaign()) {
-      this.campaignData.responsibles = this.responsibles;
-      this.serviceAddCampaign();
+      this.serviceUpdateCampaign();
     }
   }
 
-  /**
-   *
-   */
-  serviceAddCampaign(): void {
-    this.service.addCampaign(this.campaignData).subscribe(
-      result => {
-        this.router.navigate(['/campaign-details/' + result._id]);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  serviceInitializeCampaign(): void {
+    this.service
+      .getActiveCampaign(this.route.snapshot.params['id'])
+      .subscribe((data: {}) => {
+        this.campaignData = data;
+      });
   }
 
-  /**
-   *
-   */
+  serviceUpdateCampaign(): void {
+    this.service
+      .updateCampaign(this.route.snapshot.params['id'], this.campaignData)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['/book-details', res._id]);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+  }
+
   validateCampaign(): boolean {
     return (
       this.validateName() &&
       this.validateDescription() &&
       this.validateGoalAmount() &&
       this.validateIBAN() &&
-      this.validateResponsible()
+      this.validateResponsibles()
     );
   }
 
-  /**
-   *
-   */
   validateName(): boolean {
     if (this.campaignData.name === undefined) {
       this.showErrorName = true;
@@ -73,9 +81,6 @@ export class CampaignAddComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
   validateDescription(): boolean {
     if (this.campaignData.description === undefined) {
       this.showErrorDescription = true;
@@ -86,9 +91,6 @@ export class CampaignAddComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
   validateGoalAmount(): boolean {
     if (this.campaignData.goalAmount === undefined) {
       this.showErrorGoalAmount = true;
@@ -99,9 +101,6 @@ export class CampaignAddComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
   validateIBAN(): boolean {
     if (this.campaignData.iban === undefined) {
       this.showErrorIBAN = true;
@@ -113,12 +112,12 @@ export class CampaignAddComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
-  validateResponsible(): boolean {
+  validateResponsibles(): boolean {
     this.removeSpaces();
-    if (this.responsibles === undefined || this.responsibles.length === 0) {
+    if (
+      this.campaignData.responsibles === undefined ||
+      this.campaignData.length === 0
+    ) {
       this.showErrorResponsible = true;
       return false;
     } else {
@@ -127,12 +126,12 @@ export class CampaignAddComponent implements OnInit {
     }
   }
 
-  /**
-   *
-   */
   removeSpaces(): void {
-    this.responsibles = this.responsibles.filter(str => {
-      return /\S/.test(str);
-    });
+    this.campaignData.responsibles = this.campaignData.responsibles.filter(
+      str => {
+        return /\S/.test(str);
+      }
+    );
+    console.log(this.campaignData.responsibles);
   }
 }
