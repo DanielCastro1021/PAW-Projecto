@@ -9,6 +9,9 @@ import { CampaignListComponent } from './components/campaigns/campaign-list/camp
 import { CampaignDetailsComponent } from './components/campaigns/campaign-details/campaign-details.component';
 import { CampaignAddComponent } from './components/campaigns/campaign-add/campaign-add.component';
 import { CampaignEditComponent } from './components/campaigns/campaign-edit/campaign-edit.component';
+import { DonationsListComponent } from './components/donations/donations-list/donations-list.component';
+import { DonationsAddComponent } from './components/donations/donations-add/donations-add.component';
+import { DonationsDetailsComponent } from './components/donations/donations-details/donations-details.component';
 
 const routes: Routes = [
   {
@@ -33,6 +36,18 @@ const routes: Routes = [
   {
     path: 'campaign-details/:id',
     component: CampaignDetailsComponent
+  },
+  {
+    path: 'donations/:status',
+    component: DonationsListComponent
+  },
+  {
+    path: 'donation-add',
+    component: DonationsAddComponent
+  },
+  {
+    path: 'donation-details/:id',
+    component: DonationsDetailsComponent
   },
   { path: '**', redirectTo: 'campaigns' }
 ];

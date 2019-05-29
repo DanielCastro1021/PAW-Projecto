@@ -3,5 +3,5 @@ export class Donation {
   username: string;
   campaign: string;
   amount: number;
-  state: string;
+  status: string;
 }

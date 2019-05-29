@@ -62,7 +62,6 @@ export class CampaignEditComponent implements OnInit {
       .updateCampaign(this.route.snapshot.params['id'], this.campaignData)
       .subscribe(
         result => {
-          console.log(result);
           this.router.navigate(['/campaign-details/' + result._id]);
         },
         err => {
@@ -163,6 +162,5 @@ export class CampaignEditComponent implements OnInit {
         return /\S/.test(str);
       }
     );
-    console.log(this.campaignData.responsibles);
   }
 }

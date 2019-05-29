@@ -7,13 +7,6 @@
     <li><a (click)="getAllCampaigns()">All Campaigns</a></li>
   </ul>
 </nav>
-<!-- <nav class=".navbar">
-  <button class="active" (click)="getActiveCampaigns()">
-    Active Campaigns
-  </button>
-  <button (click)="getDisabledCampaigns()">Disabled Campaigns</button>
-  <button (click)="getAllCampaigns()">All Campaigns</button>
-</nav> -->
 
 <div *ngIf="campaigns">
   <h2>{{ title }}</h2>

@@ -29,6 +29,47 @@ export class CampaignDetailsComponent implements OnInit {
 
   /**
    *
+   * @param campaign
+   */
+  getCampaignsCurrentAmount(campaign) {
+    campaign.currentAmount = 0;
+    for (let i = 0; i < this.donations.length; i++) {
+      campaign.currentAmount += this.donations[i].amount;
+    }
+  }
+
+  /**
+   *
+   * @param id
+   */
+  activateCampaign(id: string) {
+    if (this.campaign.status === 'disabled') {
+      this.campaign.status = 'active';
+      this.serviceUpdateCampaign(id);
+    } else {
+      console.log(
+        'Cant deactivate this campaign, because it isn´t deactivated. '
+      );
+    }
+  }
+
+  /**
+   *
+   * @param id
+   */
+  deactivateCampaign(id: string) {
+    if (this.donations !== undefined) {
+      this.campaign.status = 'disabled';
+      this.serviceUpdateCampaign(id);
+    } else {
+      console.log(
+        'Cant deactivate this campaign, because it has no donations. '
+      );
+    }
+  }
+
+  /**
+   *
    */
   serviceGetCampaign() {
     this.service
@@ -44,7 +85,7 @@ export class CampaignDetailsComponent implements OnInit {
    */
   serviceGetDonations() {
     this.service2
-      .getDonations(this.route.snapshot.params['id'])
+      .getCampaignDonations(this.route.snapshot.params['id'])
       .subscribe((data: Donation[]) => {
         if (data.length !== 0) {
           this.donations = data;
@@ -81,58 +122,5 @@ export class CampaignDetailsComponent implements OnInit {
         console.log(err);
       }
     );
-  }
-
-  /**
-   *
-   * @param campaign
-   */
-  getCampaignsCurrentAmount(campaign) {
-    campaign.currentAmount = 0;
-    for (let i = 0; i < this.donations.length; i++) {
-      campaign.currentAmount += this.donations[i].amount;
-    }
-  }
-
-  /**
-   *
-   * @param id
-   */
-  deleteCampaign(id: string) {
-    if (this.donations === undefined) {
-      this.serviceDeleteCampaign(id);
-    } else {
-      console.log('Cant delete this campaign, because it has donations. ');
-    }
-  }
-
-  /**
-   *
-   * @param id
-   */
-  activateCampaign(id: string) {
-    if (this.campaign.status === 'disabled') {
-      this.campaign.status = 'active';
-      this.serviceUpdateCampaign(id);
-    } else {
-      console.log(
-        'Cant deactivate this campaign, because it isn´t deactivated. '
-      );
-    }
-  }
-
-  /**
-   *
-   * @param id
-   */
-  deactivateCampaign(id: string) {
-    if (this.donations !== undefined) {
-      this.campaign.status = 'disabled';
-      this.serviceUpdateCampaign(id);
-    } else {
-      console.log(
-        'Cant deactivate this campaign, because it has no donations. '
-      );
-    }
   }
 }

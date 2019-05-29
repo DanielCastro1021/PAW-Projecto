@@ -1,0 +1,26 @@
+<div *ngIf="donations">
+  <h2>{{ title }}</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Campaign</th>
+      <th>Amount($)</th>
+      <th *ngIf="allCampaigns">Status</th>
+    </tr>
+    <tr
+      routerLink="/donation-details/{{ d._id }}"
+      *ngFor="let d of donations; let i = index"
+    >
+      <td>{{ d._id }}</td>
+      <td>{{ d.username }}</td>
+      <td>{{ campaignsName[i] }}</td>
+      <td>{{ d.amount }}</td>
+      <td *ngIf="allCampaigns">{{ d.status }}</td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="!donations">
+  <p>No available donations at the moment, check out later.</p>
+</div>
