@@ -15,11 +15,11 @@ import { RegisterComponent } from './components/user/register/register.component
 import { DonationsListComponent } from './components/donations/donations-list/donations-list.component';
 import { DonationsAddComponent } from './components/donations/donations-add/donations-add.component';
 import { DonationsDetailsComponent } from './components/donations/donations-details/donations-details.component';
-import { CampaignListComponent } from './components/dashboard/campaigns/campaign-list/campaign-list.component';
-import { CampaignAddComponent } from './components/dashboard/campaigns/campaign-add/campaign-add.component';
-import { CampaignDetailsComponent } from './components/dashboard/campaigns/campaign-details/campaign-details.component';
-import { CampaignEditComponent } from './components/dashboard/campaigns/campaign-edit/campaign-edit.component';
-import { NavBarComponent } from './components/dashboard/nav-bar/nav-bar.component';
+import { CampaignListComponent } from './components/campaigns/campaign-list/campaign-list.component';
+import { CampaignAddComponent } from './components/campaigns/campaign-add/campaign-add.component';
+import { CampaignDetailsComponent } from './components/campaigns/campaign-details/campaign-details.component';
+import { CampaignEditComponent } from './components/campaigns/campaign-edit/campaign-edit.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +30,10 @@ import { NavBarComponent } from './components/dashboard/nav-bar/nav-bar.componen
     CampaignListComponent,
     CampaignAddComponent,
     CampaignDetailsComponent,
+    CampaignEditComponent,
     DonationsListComponent,
     DonationsAddComponent,
-    DonationsDetailsComponent
-    CampaignEditComponent,
+    DonationsDetailsComponent,
     NavBarComponent
   ],
   imports: [
