@@ -21,7 +21,7 @@ li a,
 
 li a:hover,
 .dropdown:hover .dropbtn {
-  background-color: #4caf50;
+  background-color: #00d975;
 }
 
 li.dropdown {
@@ -46,7 +46,7 @@ li.dropdown {
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: #333;
 }
 
 .dropdown:hover .dropdown-content {

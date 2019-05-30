@@ -12,8 +12,13 @@ import { CampaignEditComponent } from './components/campaigns/campaign-edit/camp
 import { DonationsListComponent } from './components/donations/donations-list/donations-list.component';
 import { DonationsAddComponent } from './components/donations/donations-add/donations-add.component';
 import { DonationsDetailsComponent } from './components/donations/donations-details/donations-details.component';
+import { CampaignsShowComponent } from './components/home/campaigns-show/campaigns-show.component';
 
 const routes: Routes = [
+  {
+    path: 'home',
+    component: CampaignsShowComponent
+  },
   {
     path: 'profile',
     component: ProfileComponent,
@@ -49,7 +54,7 @@ const routes: Routes = [
     path: 'donation-details/:id',
     component: DonationsDetailsComponent
   },
-  { path: '**', redirectTo: 'campaigns' }
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({

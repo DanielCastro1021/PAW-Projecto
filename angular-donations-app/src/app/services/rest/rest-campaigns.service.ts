@@ -21,6 +21,15 @@ const httpOptions = {
 export class RestCampaignsService {
   constructor(private http: HttpClient) {}
 
+  uploadLogo(formData) {
+    this.http
+      .post('http://localhost:3000/api/v1/images/upload', formData)
+      .subscribe(res => {
+        console.log(res);
+        alert('SUCCESS !!');
+      });
+  }
+
   /**
    *
    */

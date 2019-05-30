@@ -9,7 +9,7 @@ h2 {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
-  color: #4caf50;
+  color: #00d975;
 }
 
 input[type='number'] {
@@ -24,7 +24,7 @@ input[type='number'] {
 
 button {
   width: 100%;
-  background-color: #4caf50;
+  background-color: #00d975;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -34,5 +34,5 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #00d975;
 }

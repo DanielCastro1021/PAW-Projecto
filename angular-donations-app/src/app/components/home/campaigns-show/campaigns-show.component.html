@@ -1,0 +1,25 @@
+<h1 style="text-align: center">Our Campaigns</h1>
+<div *ngIf="campaigns" style="padding: 30px" class="container">
+  <div class="flip-card" *ngFor="let campaign of campaigns">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img
+          src="http://localhost:3000/api/v1/images/download?filename=/dump/image1.png"
+          alt="Campaign Image"
+          style="height:300px;"
+        />
+      </div>
+
+      <div class="flip-card-back">
+        <div class="text">
+          <h3>{{ campaign.name }}</h3>
+          <br />
+          <p>{{ campaign.name }}</p>
+          <button routerLink="/campaign-details/{{ campaign._id }}">
+            See Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,11 +18,14 @@ export class CampaignAddComponent implements OnInit {
   private showErrorIBAN = false;
   private showErrorGoalAmount = false;
   private showErrorResponsible = false;
-
+  fileData: File = null;
   constructor(public service: RestCampaignsService, private router: Router) {}
 
   ngOnInit() {}
 
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+  }
   saveCampaign(): void {
     if (this.validateCampaign()) {
       this.campaignData.responsibles = this.responsibles;

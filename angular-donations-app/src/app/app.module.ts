@@ -19,7 +19,11 @@ import { CampaignListComponent } from './components/campaigns/campaign-list/camp
 import { CampaignAddComponent } from './components/campaigns/campaign-add/campaign-add.component';
 import { CampaignDetailsComponent } from './components/campaigns/campaign-details/campaign-details.component';
 import { CampaignEditComponent } from './components/campaigns/campaign-edit/campaign-edit.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { NavBarComponent } from './components/home/nav-bar/nav-bar.component';
+import { HeaderComponent } from './components/home/header/header.component';
+import { FooterComponent } from './components/home/footer/footer.component';
+import { CampaignsShowComponent } from './components/home/campaigns-show/campaigns-show.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     DonationsListComponent,
     DonationsAddComponent,
     DonationsDetailsComponent,
-    NavBarComponent
+    NavBarComponent,
+    HeaderComponent,
+    FooterComponent,
+    CampaignsShowComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

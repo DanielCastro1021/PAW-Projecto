@@ -36,7 +36,7 @@ th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4caf50;
+  background-color: #00d975;
   color: white;
 }
 
@@ -71,5 +71,5 @@ nav li a:hover {
   cursor: pointer;
 }
 .active {
-  background-color: #4caf50;
+  background-color: #00d975;
 }
