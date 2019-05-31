@@ -3,10 +3,10 @@ var Schema = mongoose.Schema;
 
 var donationSchema = new Schema(
   {
-    userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    campainId: { type: Schema.Types.ObjectId, required: true, ref: 'Campain' },
-    amount: { type: Number, required: true },
-    status: { type: Number, required: true, default: 'in processing' }
+    username: { type: String, required: true },
+    campaign: { type: Schema.Types.ObjectId, required: true },
+    amount: { type: Number, min: 0.1, required: true },
+    status: { type: String, default: 'in processing' }
   },
   { collection: 'donationCollection' }
 );

@@ -7,18 +7,15 @@ var cors = require('cors');
 //var swaggerUi = require('swagger-ui-express');
 //var swaggerDocument = require('./swagger.json');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var authenticationRouter = require('./routes/authentication');
 var donationsRouter = require('./routes/donations');
-var campainsRouter = require('./routes/campains');
+var campaignsRouter = require('./routes/campaigns');
+var imagesRouter = require('./routes/images');
 
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/donationsDB').then(() =>
-  console.log('Connection succesful to donationsDB!').catch(err => {
-    console.log(err);
-  })
-);
+mongoose.connect('mongodb://127.0.0.1:27017/donationsDB', {
+  useNewUrlParser: true
+});
 
 var app = express();
 
@@ -37,11 +34,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dump')));
 
-app.use('/', indexRouter);
-app.use('/api/v1/users', usersRouter);
+app.use('/api/auth', authenticationRouter);
 app.use('/api/v1/donations', donationsRouter);
-app.use('/api/v1/campains', campainsRouter);
+app.use('/api/v1/campaigns', campaignsRouter);
+app.use('/api/v1/images', imagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

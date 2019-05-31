@@ -1,22 +1,19 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-var userSchema = new Schema(
+var UserSchema = new mongoose.Schema(
   {
-    username: { type: String, required: true },
+    username: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    iban: { type: String, required: true },
-    nif: { type: Number, min: 100000000, max: 999999999, required: true },
     fullname: { type: String, required: true },
-    location: {
-      type: {
-        coordinates: { type: { latitude: Number, longitude: Number } },
-        address: { type: String }
-      },
-      required: true
-    }
+    nif: { type: Number, min: 100000000, max: 999999999, required: true },
+    iban: { type: String, required: true },
+    role: { type: String, default: 'user' },
+    coordinates: { latitude: Number, longitude: Number },
+    address: { type: String }
   },
+
   { collection: 'userCollection' }
 );
 
-module.exports = mongoose.model('User', userSchema);
+mongoose.model('User', UserSchema);
+
+module.exports = mongoose.model('User');

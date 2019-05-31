@@ -1,14 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var userController = require('../controllers/userController');
+var verifyRole = require('../controllers/VerifyRole');
+var userController = require('../controllers/UserController');
 
-router.get('/', userController.getAllUsers);
-router.post('/', userController.createUser);
-
-router.get('/:userId', userController.getOneUser);
-router.put('/:userId', userController.updateUser);
-router.delete('/:userId', userController.removeUser);
-
-router.param('userId', userController.getUserById);
-
-module.exports = router;
+router.get('/count', verifyRole, userController.getCount);
