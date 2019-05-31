@@ -25,6 +25,7 @@ import { CampaignsShowComponent } from './components/website/campaigns-show/camp
 import { CampaignShowDetailsComponent } from './components/website/campaign-show-details/campaign-show-details.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileEditComponent } from './components/user/profile-edit/profile-edit.component';
+import { MapComponent } from './components/donations/map/map.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { ProfileEditComponent } from './components/user/profile-edit/profile-edi
     CampaignsShowComponent,
     CampaignShowDetailsComponent,
     DashboardComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

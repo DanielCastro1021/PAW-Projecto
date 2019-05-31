@@ -20,6 +20,8 @@
       <td *ngIf="allCampaigns">{{ d.status }}</td>
     </tr>
   </table>
+
+  <app-map [data]="donations"></app-map>
 </div>
 
 <div *ngIf="!donations">
