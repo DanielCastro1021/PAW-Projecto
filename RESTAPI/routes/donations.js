@@ -4,11 +4,8 @@ var donationController = require('../controllers/DonationController');
 var campaingController = require('../controllers/CampaignController');
 var verifyToken = require('../controllers/VerifyToken');
 var verifyRole = require('../controllers/VerifyRole');
-//User
-router.get('/', verifyToken, donationController.getAllDonations);
-router.post('/', verifyToken, donationController.createDonation);
 
-//Admin
+router.get('/', verifyRole, donationController.getAllDonations);
 router.get('/processed', verifyRole, donationController.getProcessedDonations);
 router.get(
   '/in-processing',
@@ -16,6 +13,7 @@ router.get(
   donationController.getInProcessedDonations
 );
 router.get('/canceled', verifyRole, donationController.getCanceledDonations);
+router.post('/', verifyToken, donationController.createDonation);
 
 router.get('/status', verifyRole, donationController.getSummaryStatus);
 router.get('/count', verifyRole, donationController.getSummaryCount);
@@ -30,16 +28,18 @@ router.get(
   verifyRole,
   donationController.getTotalSpentPerUser
 );
+
 router.get(
   '/users/count-donations',
   verifyRole,
   donationController.getCountDonationsPerUser
 );
 
-router.get('/user/:username', verifyToken, donationController.getUserDonations); // Vizualizar Doações do User
-router.get('/campaign/:campaign', donationController.getCampaignDonations); // Vizualizar Doações da Campaign
+router.get('/user/:username', verifyToken, donationController.getUserDonations);
 
-router.get('/:donationId', verifyToken, donationController.getOneDonation);
+router.get('/campaign/:campaignId', donationController.getCampaignDonations);
+
+router.get('/:donationId', verifyRole, donationController.getOneDonation);
 router.put('/:donationId', verifyRole, donationController.updateDonation);
 router.delete('/:donationId', verifyRole, donationController.removeDonation);
 

@@ -5,7 +5,6 @@ var campaignController = {};
 
 campaignController.createCampaign = (req, res, next) => {
   var campaign = new Campaign(req.body);
-  campaign.logo = req.file.path;
   campaign.save(err => {
     if (err) {
       next(err);
@@ -17,8 +16,8 @@ campaignController.createCampaign = (req, res, next) => {
 
 campaignController.updateCampaign = (req, res, next) => {
   Campaign.findOneAndUpdate(
-    req.body.id,
-    req.body,
+    { _id: req.params.campaignId },
+    { $set: req.body },
     { new: true },
     (err, campaign) => {
       if (err) {
@@ -96,20 +95,6 @@ campaignController.getAllDisabledCampaigns = (req, res, next) => {
       res.json(campaigns);
     }
   });
-};
-
-campaignController.getOneDisabledCampaigns = (req, res, next) => {
-  Campaign.findOne(
-    { _id: req.params.campaignId, status: 'disabled' },
-    (err, campaign) => {
-      if (err) {
-        next(err);
-      } else {
-        console.log(campaign);
-        res.json(campaign);
-      }
-    }
-  );
 };
 
 campaignController.getCampaignTotal = (req, res, next) => {

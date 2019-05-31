@@ -16,8 +16,8 @@ donationController.createDonation = (req, res, next) => {
 
 donationController.updateDonation = (req, res, next) => {
   Donation.findOneAndUpdate(
-    req.body.id,
-    req.body,
+    { _id: req.params.donationId },
+    { $set: req.body },
     { new: true },
     (err, donation) => {
       if (err) {
@@ -96,7 +96,7 @@ donationController.getCanceledDonations = (req, res, next) => {
 
 donationController.getCampaignDonations = (req, res, next) => {
   Donation.find(
-    { campaign: req.params.campaign, status: 'processed' },
+    { campaign: req.params.campaignId, status: 'processed' },
     (err, donations) => {
       if (err) {
         next(err);

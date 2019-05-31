@@ -8,9 +8,9 @@ var campaignSchema = new Schema(
     goalAmount: { type: Number, min: 0.1, required: true },
     currentAmount: { type: Number, default: 0.0 },
     iban: { type: String, required: true },
-    logo: { type: String, required: true },
     responsibles: [{ type: String, required: true }],
-    status: { type: String, default: 'active' }
+    status: { type: String, default: 'active' },
+    logo: { type: String, required: true }
   },
   { collection: 'campaignCollection' }
 );

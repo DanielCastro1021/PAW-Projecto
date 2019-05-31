@@ -83,11 +83,47 @@ authController.register = (req, res) => {
 };
 
 authController.me = (req, res, next) => {
-  User.findById(req.userId, { password: 0 }, (err, user) => {
+  User.findById(req.userId, (err, user) => {
     if (err)
       return res.status(500).send('There was a problem finding the user.');
     if (!user) return res.status(404).send('No user found.');
     res.status(200).send(user);
+  });
+};
+
+authController.updateMe = (req, res, next) => {
+  User.findOneAndUpdate(
+    { _id: req.params.userId },
+    { $set: req.body },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(user);
+      }
+    }
+  );
+};
+
+authController.removeMe = (req, res, next) => {
+  req.user.remove(err => {
+    if (err) {
+      next(err);
+    } else {
+      res.json(req.user);
+    }
+  });
+};
+
+authController.getProfileById = (req, res, next, id) => {
+  User.findOne({ _id: id }, (err, user) => {
+    if (err) {
+      next(err);
+    } else {
+      req.user = user;
+      next();
+    }
   });
 };
 
