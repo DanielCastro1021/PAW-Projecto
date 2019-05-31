@@ -1,19 +1,37 @@
-<div *ngIf="user">
-  <h2>{{ user.fullname | uppercase }} Profile</h2>
-  <div><span>Username: </span>{{ user.username }}</div>
-  <div><span>Full Name: </span>{{ user.fullname }}</div>
-  <div><span>NIF: </span>{{ user.nif }}</div>
-  <div><span>IBAN: </span>{{ user.iban }}</div>
+<div>
+  <div *ngIf="user">
+    <h2>My Profile</h2>
+    <p>My Personal Information:</p>
+    <ul>
+      <li>Username: {{ user.username }}</li>
+      <li>Full Name: {{ user.fullname }}</li>
+      <li>NIF: {{ user.nif }}</li>
+      <li>IBAN: {{ user.iban }}</li>
+      <li>Location:</li>
 
-  <span>Location: </span><br />
-  <div *ngIf="user.coordinates">
-    <span>Coordinates: </span><br />
-    <span>Latitude: </span>{{ user.coordinates.latitude }} <br />
-    <span>Longitude: </span>{{ user.coordinates.longitude }}
-  </div>
-  <div *ngIf="user.address">
-    <span *ngIf="user">Address: </span>{{ user.address }}
+      <li *ngIf="user.coordinates">
+        Coordinates: <br />
+        Latitude: {{ user.coordinates.latitude }} <br />
+        Longitude:
+        {{ user.coordinates.longitude }}
+      </li>
+
+      <li *ngIf="user.address">Address: {{ user.address }}</li>
+    </ul>
   </div>
 
-  <div><button (click)="logOut()">Log Out</button></div>
+  <ul *ngIf="donations">
+    <p>Donations:</p>
+    <br />
+    <ul *ngFor="let d of donations; let j = index">
+      <li>Campaign: {{ d.campaign }}</li>
+      <li>Amount: {{ d.amount }} $</li>
+      <br />
+    </ul>
+    <li>Total Donated: {{ totalSpent }} $</li>
+  </ul>
+
+  <button routerLink="/profile-edit/{{ user._id }}">Edit</button>
+  <button (click)="delete()">Delete Account</button>
+  <button (click)="logOut()">Log Out</button>
 </div>

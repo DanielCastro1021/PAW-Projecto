@@ -29,17 +29,6 @@ export class CampaignDetailsComponent implements OnInit {
 
   /**
    *
-   * @param campaign
-   */
-  getCampaignsCurrentAmount(campaign) {
-    campaign.currentAmount = 0;
-    for (let i = 0; i < this.donations.length; i++) {
-      campaign.currentAmount += this.donations[i].amount;
-    }
-  }
-
-  /**
-   *
    * @param id
    */
   activateCampaign(id: string) {
@@ -94,6 +83,19 @@ export class CampaignDetailsComponent implements OnInit {
       });
   }
 
+  /**
+   *
+   * @param campaign
+   */
+  getCampaignsCurrentAmount(campaign) {
+    let amount = 0;
+    for (let i = 0; i < this.donations.length; i++) {
+      amount += this.donations[i].amount;
+    }
+    if (campaign.currentAmount < amount) {
+      campaign.currentAmount = amount;
+    }
+  }
   /**
    *
    * @param id

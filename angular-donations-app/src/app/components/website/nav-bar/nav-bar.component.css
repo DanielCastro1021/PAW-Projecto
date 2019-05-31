@@ -1,8 +1,13 @@
+* {
+  font-weight: bold;
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: #333;
 }
 
@@ -12,6 +17,7 @@ li {
 
 li a,
 .dropbtn {
+  cursor: pointer;
   display: inline-block;
   color: white;
   text-align: center;
@@ -47,6 +53,7 @@ li.dropdown {
 
 .dropdown-content a:hover {
   background-color: #333;
+  color: #f9f9f9;
 }
 
 .dropdown:hover .dropdown-content {

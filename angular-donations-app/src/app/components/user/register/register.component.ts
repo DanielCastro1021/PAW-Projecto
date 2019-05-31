@@ -17,7 +17,9 @@ export class RegisterComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getLocation();
+  }
 
   register() {
     console.log(this.userData);
@@ -30,5 +32,23 @@ export class RegisterComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  getLocation(): void {
+    if (window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          this.userData.coordinates.latitude = position.coords.latitude;
+          this.userData.coordinates.longitude = position.coords.longitude;
+        },
+        failure => {
+          if (failure.message.indexOf('Only secure origins are allowed') == 0) {
+            alert('Only secure origins are allowed by your browser.');
+          }
+        }
+      );
+    } else {
+      console.log("Your browser doesn't support geolocation");
+    }
   }
 }

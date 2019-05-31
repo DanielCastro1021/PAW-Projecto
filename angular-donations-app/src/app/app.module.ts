@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -19,12 +18,13 @@ import { CampaignListComponent } from './components/campaigns/campaign-list/camp
 import { CampaignAddComponent } from './components/campaigns/campaign-add/campaign-add.component';
 import { CampaignDetailsComponent } from './components/campaigns/campaign-details/campaign-details.component';
 import { CampaignEditComponent } from './components/campaigns/campaign-edit/campaign-edit.component';
-import { NavBarComponent } from './components/home/nav-bar/nav-bar.component';
-import { HeaderComponent } from './components/home/header/header.component';
-import { FooterComponent } from './components/home/footer/footer.component';
-import { CampaignsShowComponent } from './components/home/campaigns-show/campaigns-show.component';
+import { NavBarComponent } from './components/website/nav-bar/nav-bar.component';
+import { HeaderComponent } from './components/website/header/header.component';
+import { FooterComponent } from './components/website/footer/footer.component';
+import { CampaignsShowComponent } from './components/website/campaigns-show/campaigns-show.component';
+import { CampaignShowDetailsComponent } from './components/website/campaign-show-details/campaign-show-details.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
+import { ProfileEditComponent } from './components/user/profile-edit/profile-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +42,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HeaderComponent,
     FooterComponent,
     CampaignsShowComponent,
-    DashboardComponent
+    CampaignShowDetailsComponent,
+    DashboardComponent,
+    ProfileEditComponent
   ],
   imports: [
     BrowserModule,

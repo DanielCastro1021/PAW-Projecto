@@ -44,3 +44,8 @@
   color: white;
   transform: rotateY(180deg);
 }
+
+.flip-card-front img {
+  height: 100%;
+  width: 100%;
+}

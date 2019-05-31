@@ -105,8 +105,42 @@ export class RestDonationsService {
    *
    * @param id
    */
-  getUserDonations(id: string): Observable<Donation[]> {
-    return this.http.get<Donation[]>(endpoint + '/user/' + id);
+  getUserDonations(username: string): Observable<Donation[]> {
+    return this.http.get<Donation[]>(endpoint + '/user/' + username);
+  }
+  /**
+   * This return the total number of donations made.
+   */
+  getDonationsCount(): Observable<any> {
+    return this.http.get<any>(endpoint + '/count');
+  }
+
+  /**
+   * This function return the count of each value, in the variable status of Donation.
+   */
+  getDonationsStatusSummary(): Observable<any> {
+    return this.http.get<any>(endpoint + '/status');
+  }
+
+  /**
+   * This function return the sum of all processed donations.
+   */
+  getDonationsTotalAmount(): Observable<any> {
+    return this.http.get<any>(endpoint + '/total-donated');
+  }
+
+  /**
+   * This function return the total amount spent in donations, per user.
+   */
+  getTotalSpentPerUser(): Observable<any> {
+    return this.http.get<any>(endpoint + '/users/total-spent');
+  }
+
+  /**
+   * This function return the number of donations made by each user.
+   */
+  getCountDonationsPerUser(): Observable<any> {
+    return this.http.get<any>(endpoint + '/users/count-donations');
   }
 
   /**

@@ -1,14 +1,5 @@
 <div>
-  <h2>Sign Up</h2>
-
-  <label>Username:</label>
-  <input [(ngModel)]="userData.username" type="text" placeholder="username" />
-  <br />
-
-  <label>Password:</label>
-  <input [(ngModel)]="userData.password" type="text" placeholder="password" />
-  <br />
-
+  <h2>My Profile</h2>
   <label>Full Name:</label>
   <input [(ngModel)]="userData.fullname" type="text" placeholder="fullname" />
   <br />
@@ -41,6 +32,9 @@
     placeholder="longitude"
     ng-required="!(userData.address)"
   />
+  <button (click)="getLocation()">
+    Change Coordinates To Current Location
+  </button>
   <br />
 
   <hr />
@@ -52,6 +46,5 @@
     ng-required="!(userData.coordinates.latitude && userData.coordinates.longitude)"
   />
   <br />
-  <button (click)="register()">Sign Up</button>
-  <a routerLink="/login">Sign In</a>
+  <button (click)="serviceUpdateProfile()">Edit</button>
 </div>

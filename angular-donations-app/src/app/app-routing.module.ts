@@ -12,8 +12,12 @@ import { CampaignEditComponent } from './components/campaigns/campaign-edit/camp
 import { DonationsListComponent } from './components/donations/donations-list/donations-list.component';
 import { DonationsAddComponent } from './components/donations/donations-add/donations-add.component';
 import { DonationsDetailsComponent } from './components/donations/donations-details/donations-details.component';
-import { CampaignsShowComponent } from './components/home/campaigns-show/campaigns-show.component';
+import { CampaignsShowComponent } from './components/website/campaigns-show/campaigns-show.component';
+import { CampaignShowDetailsComponent } from './components/website/campaign-show-details/campaign-show-details.component';
 
+import { from } from 'rxjs';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileEditComponent } from './components/user/profile-edit/profile-edit.component';
 const routes: Routes = [
   {
     path: 'home',
@@ -24,35 +28,56 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthenticationGuard]
   },
+  {
+    path: 'profile-edit/:id',
+    component: ProfileEditComponent,
+    canActivate: [AuthenticationGuard]
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
     path: 'campaigns/:status',
-    component: CampaignListComponent
+    component: CampaignListComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'campaign-add',
-    component: CampaignAddComponent
+    component: CampaignAddComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'campaign-edit/:id',
-    component: CampaignEditComponent
+    component: CampaignEditComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'campaign-details/:id',
-    component: CampaignDetailsComponent
+    component: CampaignDetailsComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'donations/:status',
-    component: DonationsListComponent
+    component: DonationsListComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'donation-add',
-    component: DonationsAddComponent
+    component: DonationsAddComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'donation-details/:id',
-    component: DonationsDetailsComponent
+    component: DonationsDetailsComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'campaign-show-details/:id',
+    component: CampaignShowDetailsComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AdminGuard]
   },
   { path: '**', redirectTo: 'home' }
 ];

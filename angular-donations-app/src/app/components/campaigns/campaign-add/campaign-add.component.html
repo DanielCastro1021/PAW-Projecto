@@ -75,7 +75,22 @@
   </label>
 
   <br />
-  Logo:
-  <input type="file" name="image" />
-  <button type="submit" (click)="saveCampaign()">Create campaign</button>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h3>
+          Logo: <br />
+          Choose File
+        </h3>
+        <form>
+          <div class="form-group">
+            <input (change)="fileProgress($event)" type="file" name="image" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" (click)="onSubmit()">Create campaign</button>
 </div>

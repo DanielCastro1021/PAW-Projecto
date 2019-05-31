@@ -80,14 +80,17 @@ export class CampaignListComponent implements OnInit {
   }
 
   getCampaignsCurrentAmount(campaign) {
-    campaign.currentAmount = 0;
+    let amount = 0;
     this.service2
       .getCampaignDonations(campaign._id)
       .subscribe((data: Donation[]) => {
         let donations = data;
         for (let i = 0; i < donations.length; i++) {
-          campaign.currentAmount += donations[i].amount;
+          amount += donations[i].amount;
         }
       });
+    if (campaign.currentAmount < amount) {
+      campaign.currentAmount = amount;
+    }
   }
 }
