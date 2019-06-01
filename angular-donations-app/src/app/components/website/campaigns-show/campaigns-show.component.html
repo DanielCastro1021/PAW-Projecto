@@ -12,11 +12,26 @@
       </div>
       <div class="flip-card-back">
         <div class="text">
+          <br />
+          <br />
           <h3>{{ campaign.name }}</h3>
           <br />
-          <p>{{ campaign.name }}</p>
+          <p>{{ campaign.description }}</p>
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              aria-valuenow="500 "
+              aria-valuemin="0"
+              aria-valuemax=" campaign.goalAmount"
+              style="width: 75%"
+            ></div>
+          </div>
+          Progress:
+          <p>{{ (campaign.currentAmount / campaign.goalAmount) * 100 }}%</p>
+          <br />
           <button routerLink="/campaign-show-details/{{ campaign._id }}">
-            See Details
+            Donate
           </button>
         </div>
       </div>

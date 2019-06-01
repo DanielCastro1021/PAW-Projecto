@@ -21,6 +21,9 @@ const httpOptions = {
 export class RestCampaignsService {
   constructor(private http: HttpClient) {}
 
+  /**
+   *
+   */
   uploadLogo(formData) {
     this.http
       .post('http://localhost:3000/api/v1/images/upload', formData)
@@ -127,6 +130,11 @@ export class RestCampaignsService {
     return this.http.get<any>(endpoint + '/total');
   }
 
+  /**
+   *
+   * @param operation
+   * @param result
+   */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

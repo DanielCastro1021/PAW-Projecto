@@ -7,7 +7,7 @@
       <th>Username</th>
       <th>Campaign</th>
       <th>Amount($)</th>
-      <th *ngIf="allCampaigns">Status</th>
+      <th *ngIf="showStatus">Status</th>
     </tr>
     <tr
       routerLink="/donation-details/{{ d._id }}"
@@ -17,11 +17,13 @@
       <td>{{ d.username }}</td>
       <td>{{ campaignsName[i] }}</td>
       <td>{{ d.amount }}</td>
-      <td *ngIf="allCampaigns">{{ d.status }}</td>
+      <td *ngIf="showStatus">{{ d.status }}</td>
     </tr>
   </table>
 
-  <app-map [data]="donations"></app-map>
+  <!-- <button (click)="toggleMap()">Map</button> -->
+
+  <app-map [donations]="donations"></app-map>
 </div>
 
 <div *ngIf="!donations">

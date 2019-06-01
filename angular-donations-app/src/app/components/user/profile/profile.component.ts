@@ -42,9 +42,8 @@ export class ProfileComponent implements OnInit {
   serviceGetProfile(): void {
     this.service.getMe().subscribe(
       data => {
-        console.log(data);
         this.user = data;
-        // this.serviceGetUserDonations();
+        this.serviceGetUserDonations();
       },
       err => {
         console.log(err);
@@ -56,6 +55,7 @@ export class ProfileComponent implements OnInit {
   serviceGetUserDonations(): void {
     this.service2.getUserDonations(this.user.username).subscribe(
       (donations: Donation[]) => {
+        this.donations = [];
         this.donations = donations;
         this.getDonationsInfoSpent();
       },
@@ -67,7 +67,7 @@ export class ProfileComponent implements OnInit {
 
   getDonationsInfoSpent(): void {
     this.totalSpent = 0;
-    for (let i = 0; this.donations.length; i++) {
+    for (let i = 0; i < this.donations.length; i++) {
       this.service3.getCampaign(this.donations[i].campaign).subscribe(
         (campaign: Campaign) => {
           this.donations[i].campaign = campaign.name;

@@ -1,7 +1,9 @@
-<div *ngIf="campaign" class="division">
+<div *ngIf="campaign" class="division" height="400px">
   <h2>Details of {{ campaign.name | uppercase }}</h2>
   <img
-    src="http://localhost:3000/api/v1/images/download?filename=/dump/image1.png"
+    src="http://localhost:3000/api/v1/images/download?filename={{
+      campaign.logo
+    }}"
     alt="Campaign Image"
   />
   <div
@@ -34,6 +36,11 @@
 
     <div *ngIf="!campaign">
       <p>Sorry a problem occurred.</p>
+    </div>
+    <app-donations-add *ngIf="currentUser"></app-donations-add>
+    <div>
+      <h4 style="text-align: center">Sorry you must be logged to Donate</h4>
+      <button routerLink="/login">Login</button>
     </div>
   </div>
 </div>

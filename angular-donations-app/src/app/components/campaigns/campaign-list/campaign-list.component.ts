@@ -88,9 +88,9 @@ export class CampaignListComponent implements OnInit {
         for (let i = 0; i < donations.length; i++) {
           amount += donations[i].amount;
         }
+        if (campaign.currentAmount < amount) {
+          campaign.currentAmount = amount;
+        }
       });
-    if (campaign.currentAmount < amount) {
-      campaign.currentAmount = amount;
-    }
   }
 }

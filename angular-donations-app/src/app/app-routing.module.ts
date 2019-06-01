@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationGuard } from './guards/authentication/authentication.guard';
-import { AdminGuard } from './guards/admin/admin.guard';
+import { AdminGuard } from './guards/authentication/admin.guard';
 import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
@@ -14,10 +14,10 @@ import { DonationsAddComponent } from './components/donations/donations-add/dona
 import { DonationsDetailsComponent } from './components/donations/donations-details/donations-details.component';
 import { CampaignsShowComponent } from './components/website/campaigns-show/campaigns-show.component';
 import { CampaignShowDetailsComponent } from './components/website/campaign-show-details/campaign-show-details.component';
-
-import { from } from 'rxjs';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileEditComponent } from './components/user/profile-edit/profile-edit.component';
+import { LoggedGuard } from './guards/authentication/logged.guard';
+
 const routes: Routes = [
   {
     path: 'home',
@@ -33,8 +33,12 @@ const routes: Routes = [
     component: ProfileEditComponent,
     canActivate: [AuthenticationGuard]
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedGuard] },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [LoggedGuard]
+  },
   {
     path: 'campaigns/:status',
     component: CampaignListComponent,

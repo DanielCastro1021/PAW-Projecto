@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-profile-edit',
@@ -44,7 +43,7 @@ export class ProfileEditComponent implements OnInit {
         }
       );
     } else {
-      console.log("Your browser doesn't support geolocation");
+      console.log('Your browser doesn´t support geolocation.');
     }
   }
 

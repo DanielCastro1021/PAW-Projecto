@@ -9,10 +9,6 @@
     placeholder=" name"
   />
 
-  <label *ngIf="showErrorName"
-    >This parameter is empty, it must be filled.</label
-  >
-
   <label for="description">Description:</label>
   <input
     [(ngModel)]="campaignData.description"
@@ -22,11 +18,6 @@
     placeholder=" description"
   />
 
-  <label *ngIf="showErrorDescription" class="error">
-    <br />
-    This parameter is empty, it must be filled.
-  </label>
-
   <label for="goalAmount">Goal Amount($):</label>
   <input
     [(ngModel)]="campaignData.goalAmount"
@@ -34,10 +25,6 @@
     name="goalAmount"
     placeholder=" goalAmount"
   />
-  <label *ngIf="showErrorGoalAmount" class="error">
-    <br />
-    Amount must be superior to 0$.
-  </label>
 
   <label for="iban">IBAN:</label>
   <input
@@ -47,11 +34,6 @@
     name="iban"
     placeholder=" iban"
   />
-
-  <label *ngIf="showErrorIBAN" class="error">
-    <br />
-    This parameter is empty, it must be filled.
-  </label>
 
   <label for="responsibles">Responsibles:</label>
   <input
@@ -68,11 +50,6 @@
     name="responsibles"
     placeholder="optional "
   />
-
-  <label *ngIf="showErrorResponsible" class="error">
-    <br />
-    Must exist at least one responsible.
-  </label>
 
   <br />
 

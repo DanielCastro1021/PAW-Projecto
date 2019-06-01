@@ -22,36 +22,44 @@
   <br />
 
   <hr />
-  <label>Location:</label><br />
-  <hr />
-  <label>Coordinates:</label><br /><br />
-  <label>Latitude:</label>
-  <input
-    [(ngModel)]="userData.coordinates.latitude"
-    type="number"
-    placeholder="latitude"
-    ng-required="!(userData.address)"
-  />
+  <label>Location:</label> <br />
+  <input type="radio" (change)="toggleCoordinatinates()" name="location" />
+  Coordinates
   <br />
-
-  <label>Longitude:</label>
-  <input
-    [(ngModel)]="userData.coordinates.longitude"
-    type="number"
-    placeholder="longitude"
-    ng-required="!(userData.address)"
-  />
+  <input type="radio" (change)="toggleAddress()" name="location" /> Address
   <br />
 
   <hr />
-  <label>Address:</label>
-  <input
-    [(ngModel)]="userData.address"
-    type="text"
-    placeholder="address"
-    ng-required="!(userData.coordinates.latitude && userData.coordinates.longitude)"
-  />
-  <br />
+  <div *ngIf="coordinatesToggle">
+    <label>Coordinates:</label><br /><br />
+    <label>Latitude:</label>
+    <input
+      [(ngModel)]="userData.coordinates.latitude"
+      type="number"
+      placeholder="latitude"
+      ng-required="!(userData.address)"
+    />
+    <br />
+
+    <label>Longitude:</label>
+    <input
+      [(ngModel)]="userData.coordinates.longitude"
+      type="number"
+      placeholder="longitude"
+      ng-required="!(userData.address)"
+    />
+  </div>
+
+  <div *ngIf="addressToggle">
+    <label>Address:</label>
+    <input
+      [(ngModel)]="userData.address"
+      type="text"
+      placeholder="address"
+      ng-required="!(userData.coordinates.latitude && userData.coordinates.longitude)"
+    />
+  </div>
+
   <button (click)="register()">Sign Up</button>
   <a routerLink="/login">Sign In</a>
 </div>

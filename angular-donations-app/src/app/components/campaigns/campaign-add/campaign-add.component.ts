@@ -11,13 +11,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 })
 export class CampaignAddComponent implements OnInit {
   @Input() campaignData: Campaign = new Campaign();
-
   responsibles: any = [];
-  private showErrorName = false;
-  private showErrorDescription = false;
-  private showErrorIBAN = false;
-  private showErrorGoalAmount = false;
-  private showErrorResponsible = false;
   private url = 'http://localhost:3000/api/v1/images/upload';
 
   constructor(
@@ -96,10 +90,9 @@ export class CampaignAddComponent implements OnInit {
    */
   validateName(): boolean {
     if (this.campaignData.name === undefined) {
-      this.showErrorName = true;
+      alert('Name parameter must be filled!!!');
       return false;
     } else {
-      this.showErrorName = false;
       return this.campaignData.name.length > 0;
     }
   }
@@ -109,10 +102,9 @@ export class CampaignAddComponent implements OnInit {
    */
   validateDescription(): boolean {
     if (this.campaignData.description === undefined) {
-      this.showErrorDescription = true;
+      alert('Description parameter must be filled!!!');
       return false;
     } else {
-      this.showErrorDescription = false;
       return this.campaignData.description.length > 0;
     }
   }
@@ -122,10 +114,9 @@ export class CampaignAddComponent implements OnInit {
    */
   validateGoalAmount(): boolean {
     if (this.campaignData.goalAmount === undefined) {
-      this.showErrorGoalAmount = true;
+      alert('Goal amount parameter must be filled!!!');
       return false;
     } else {
-      this.showErrorGoalAmount = false;
       return this.campaignData.goalAmount > 0;
     }
   }
@@ -135,10 +126,9 @@ export class CampaignAddComponent implements OnInit {
    */
   validateIBAN(): boolean {
     if (this.campaignData.iban === undefined) {
-      this.showErrorIBAN = true;
+      alert('IBAN  parameter must be filled!!!');
       return false;
     } else {
-      this.showErrorIBAN = false;
       this.campaignData.iban = this.campaignData.iban.toUpperCase();
       return this.campaignData.iban.length > 0;
     }
@@ -150,10 +140,9 @@ export class CampaignAddComponent implements OnInit {
   validateResponsible(): boolean {
     this.removeSpaces();
     if (this.responsibles === undefined || this.responsibles.length === 0) {
-      this.showErrorResponsible = true;
+      alert('I must exist at least on responsible of this campaign!!!');
       return false;
     } else {
-      this.showErrorResponsible = false;
       return true;
     }
   }

@@ -16,6 +16,8 @@ export class CampaignShowDetailsComponent implements OnInit {
   showDetails = false;
   totalDonated: number;
   progress: number;
+  currentUser;
+
   constructor(
     public service: RestCampaignsService,
     public service2: RestDonationsService,
@@ -24,6 +26,7 @@ export class CampaignShowDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.serviceGetActiveCampaign();
   }
 

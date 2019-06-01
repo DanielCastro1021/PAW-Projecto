@@ -11,9 +11,6 @@ import { debug } from 'util';
 })
 export class DonationsAddComponent implements OnInit {
   @Input() donationData: Donation = new Donation();
-  showErrorInput = false;
-  showErrorAmount = false;
-  showErrorNotLogged = false;
 
   constructor(
     public service: RestDonationsService,
@@ -30,28 +27,17 @@ export class DonationsAddComponent implements OnInit {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     if (this.validateInput()) {
-      this.showErrorInput = true;
-      this.showErrorAmount = false;
-      this.showErrorNotLogged = false;
+      alert('You must donate something.');
     } else if (this.validateAmount()) {
-      this.showErrorInput = false;
-      this.showErrorAmount = true;
-      this.showErrorNotLogged = false;
-
+      alert('Must donate at least 0.1 $');
       this.donationData.amount = undefined;
     } else if (currentUser) {
-      this.showErrorInput = false;
-      this.showErrorAmount = false;
-      this.showErrorNotLogged = false;
       this.donationData.campaign = this.route.snapshot.params['id'];
-      this.donationData.username = currentUser.user;
+      this.donationData.username = currentUser.username;
 
       this.serviceAddDonation();
     } else {
-      this.showErrorInput = false;
-      this.showErrorAmount = false;
-      this.showErrorNotLogged = true;
-      console.log('To donate you need to be logged.');
+      alert('To donate you need to be logged.');
     }
   }
 

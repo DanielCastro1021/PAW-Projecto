@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestCampaignsService } from 'src/app/services/rest/rest-campaigns.service';
 import { RestDonationsService } from 'src/app/services/rest/rest-donations.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +15,13 @@ export class DashboardComponent implements OnInit {
   donationsStatus: any;
   donationsCount: number;
 
+  usersStatus: any;
+  usersCount: number;
+
   constructor(
     public service: RestCampaignsService,
-    public service2: RestDonationsService
+    public service2: RestDonationsService,
+    public service3: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -24,6 +29,7 @@ export class DashboardComponent implements OnInit {
     this.serviceGetCampaignsCount();
     this.service2GetDonationsStatus();
     this.service2GetDonationsCount();
+    this.service3GetUsersCount();
   }
 
   serviceGetCampaignsStatus(): void {
@@ -51,7 +57,6 @@ export class DashboardComponent implements OnInit {
   service2GetDonationsStatus(): void {
     this.service2.getDonationsStatusSummary().subscribe(
       (data: {}) => {
-        console.log(data);
         this.donationsStatus = data;
       },
       err => {
@@ -69,5 +74,25 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  service3GetUsersCount(): void {
+    this.service3.getUserRoles().subscribe(
+      (data: {}) => {
+        this.usersStatus = data;
+        this.countUsers(this.usersStatus);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  countUsers(data) {
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+      sum += data[i].total;
+    }
+    this.usersCount = sum;
   }
 }

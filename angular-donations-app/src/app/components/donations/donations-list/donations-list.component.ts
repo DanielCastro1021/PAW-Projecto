@@ -11,9 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DonationsListComponent implements OnInit {
   title: string;
+  showStatus: boolean;
+  showMap: boolean;
+
   donations: Donation[];
   campaignsName: string[];
-  allCampaigns: boolean = false;
+
   constructor(
     public service: RestDonationsService,
     public service2: RestCampaignsService,
@@ -48,7 +51,7 @@ export class DonationsListComponent implements OnInit {
       this.donations = data;
       this.title = 'All donations';
       this.getCampaignNameOfDonations();
-      this.allCampaigns = true;
+      this.showStatus = true;
     });
   }
 
@@ -61,7 +64,7 @@ export class DonationsListComponent implements OnInit {
       this.donations = data;
       this.title = 'Processed Donations';
       this.getCampaignNameOfDonations();
-      this.allCampaigns = false;
+      this.showStatus = false;
     });
   }
 
@@ -74,7 +77,7 @@ export class DonationsListComponent implements OnInit {
       this.donations = data;
       this.title = 'In-Processing Donations';
       this.getCampaignNameOfDonations();
-      this.allCampaigns = false;
+      this.showStatus = false;
     });
   }
 
@@ -87,7 +90,7 @@ export class DonationsListComponent implements OnInit {
       this.donations = data;
       this.title = 'Canceled Donations';
       this.getCampaignNameOfDonations();
-      this.allCampaigns = false;
+      this.showStatus = false;
     });
   }
 
@@ -102,6 +105,14 @@ export class DonationsListComponent implements OnInit {
         .subscribe((data: Campaign) => {
           this.campaignsName[i] = data.name;
         });
+    }
+  }
+
+  toggleMap() {
+    if (this.showMap === true) {
+      this.showMap = false;
+    } else {
+      this.showMap = true;
     }
   }
 }

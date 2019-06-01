@@ -27,4 +27,16 @@
       <li>Total Count:{{ donationsCount }}</li>
     </ul>
   </div>
+  <div class="column">
+    <ul>
+      <h2>Users:</h2>
+      <br />
+      <li>Role Count:</li>
+      <ul *ngFor="let state of usersStatus">
+        <li *ngIf="state._id == 'admin'">Admin: {{ state.total }}</li>
+        <li *ngIf="state._id == 'user'">User: {{ state.total }}</li>
+      </ul>
+      <li>Total Count: {{ usersCount }}</li>
+    </ul>
+  </div>
 </div>

@@ -38,7 +38,7 @@ export class AuthenticationService {
     return this.http.get<any>(endpoint + 'logout');
   }
 
-  register(user: User) {
+  register(user) {
     return this.http.post<any>(endpoint + 'register', { user }).pipe(
       map(user => {
         // login successful if there's a jwt token in the response
@@ -65,10 +65,18 @@ export class AuthenticationService {
   }
 
   deleteMe(id) {
-    return this.http.delete<any>(endpoint + 'profile/' + id).pipe(
+    return this.http.delete<any>(endpoint + id).pipe(
       tap(_ => console.log(`deleted User id=${id}`)),
       catchError(this.handleError<any>('deleteUser'))
     );
+  }
+
+  getUserByUsername(username) {
+    return this.http.get<User>(endpoint + 'user/' + username);
+  }
+
+  getUserRoles() {
+    return this.http.get<User>(endpoint + 'roles');
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

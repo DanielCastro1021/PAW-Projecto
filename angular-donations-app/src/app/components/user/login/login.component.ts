@@ -19,7 +19,24 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   *
+   */
   login() {
+    console.log(this.userData);
+    if (this.userData.username === '') {
+      alert('Please insert username.');
+    } else if (this.userData.password === '') {
+      alert('Please insert password.');
+    } else {
+      this.serviceLogin();
+    }
+  }
+
+  /**
+   *
+   */
+  serviceLogin(): void {
     this.service
       .login(this.userData.username, this.userData.password)
       .subscribe(
@@ -29,6 +46,9 @@ export class LoginComponent implements OnInit {
         },
         err => {
           console.log(err);
+          alert(
+            'Sorry we could not found you, please check if username and password are correct.'
+          );
         }
       );
   }

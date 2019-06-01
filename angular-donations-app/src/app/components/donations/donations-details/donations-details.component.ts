@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Donation } from 'src/app/models/Donation';
 import { RestDonationsService } from 'src/app/services/rest/rest-donations.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Campaign } from 'src/app/models/Campaign';
+import { RestCampaignsService } from 'src/app/services/rest/rest-campaigns.service';
 
 @Component({
   selector: 'app-donations-details',
@@ -10,9 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DonationsDetailsComponent implements OnInit {
   donation: Donation = new Donation();
-
+  campaignName: string;
   constructor(
     public service: RestDonationsService,
+    public service2: RestCampaignsService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -72,5 +75,12 @@ export class DonationsDetailsComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  serviceGetCampaignofDonation() {
+    this.service2
+      .getCampaign(this.donation.campaign)
+      .subscribe((data: Campaign) => {
+        this.campaignName = data.name;
+      });
   }
 }

@@ -107,11 +107,11 @@ authController.updateMe = (req, res, next) => {
 };
 
 authController.removeMe = (req, res, next) => {
-  req.user.remove(err => {
+  User.findByIdAndDelete({ _id: req.params.userId }, (err, user) => {
     if (err) {
       next(err);
     } else {
-      res.json(req.user);
+      res.json(user);
     }
   });
 };
@@ -125,6 +125,29 @@ authController.getProfileById = (req, res, next, id) => {
       next();
     }
   });
+};
+
+authController.getProfileByUsername = (req, res, next) => {
+  User.findOne({ username: req.params.username }, (err, user) => {
+    if (err) {
+      next(err);
+    } else {
+      res.json(user);
+    }
+  });
+};
+
+authController.getRolesCount = (req, res, next) => {
+  User.aggregate(
+    [{ $group: { _id: '$role', total: { $sum: 1 } } }],
+    (err, results) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(results);
+      }
+    }
+  );
 };
 
 module.exports = authController;
