@@ -47,10 +47,10 @@ export class AuthenticationService {
 
   /**
    * This function makes a http post request to REST API, to register a user.
-   * @param userData This is a User.
+   * @param user This is a User.
    */
-  register(userData) {
-    return this.http.post<any>(endpoint + 'register', { userData }).pipe(
+  register(user) {
+    return this.http.post<any>(endpoint + 'register', { user }).pipe(
       map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.token) {

@@ -37,8 +37,10 @@
     <div *ngIf="!campaign">
       <p>Sorry a problem occurred.</p>
     </div>
+
     <app-donations-add *ngIf="currentUser"></app-donations-add>
-    <div>
+
+    <div *ngIf="!currentUser">
       <h4 style="text-align: center">Sorry you must be logged to Donate</h4>
       <button routerLink="/login">Login</button>
     </div>
