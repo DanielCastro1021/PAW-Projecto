@@ -42,20 +42,6 @@ export class DonationsAddComponent implements OnInit {
   }
 
   /**
-   * This function validates if the amount in the input is filled.
-   */
-  validateInput(): boolean {
-    return this.donationData.amount === undefined;
-  }
-
-  /**
-   * This function validates if the amount is valid.
-   */
-  validateAmount(): boolean {
-    return this.donationData.amount === 0;
-  }
-
-  /**
    * This function saves the donation in the database using the RestDonationsService.
    */
   serviceAddDonation(): void {
@@ -67,5 +53,19 @@ export class DonationsAddComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  /**
+   * This function validates if the amount in the input is filled.
+   */
+  validateInput(): boolean {
+    return this.donationData.amount === undefined;
+  }
+
+  /**
+   * This function validates if the amount is valid.
+   */
+  validateAmount(): boolean {
+    return this.donationData.amount === 0;
   }
 }
