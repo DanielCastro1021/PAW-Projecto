@@ -1,0 +1,28 @@
+<app-nav-bar></app-nav-bar>
+<div *ngIf="campaigns">
+  <h2>{{ title }}</h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Current Amount</th>
+      <th>Goal Amount</th>
+      <th *ngIf="showStatus">Status</th>
+    </tr>
+    <tr *ngFor="let c of campaigns; let i = index">
+      <td>
+        <a routerLink="/campaign-details/{{ c._id }}">
+          {{ c.name }}
+        </a>
+      </td>
+      <td>{{ c.description }}</td>
+      <td>{{ c.currentAmount }}</td>
+      <td>{{ c.goalAmount }}</td>
+      <td *ngIf="showStatus">{{ c.status }}</td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="!campaigns">
+  <p>No available campaigns at the moment, check out later.</p>
+</div>

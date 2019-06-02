@@ -1,0 +1,75 @@
+<h2>Add Campaign</h2>
+<div>
+  <label for="name">Name:</label>
+  <input
+    [(ngModel)]="campaignData.name"
+    type="text"
+    maxlength="20"
+    name="name"
+    placeholder=" name"
+  />
+
+  <label for="description">Description:</label>
+  <input
+    [(ngModel)]="campaignData.description"
+    type="text"
+    maxlength="120"
+    name="description"
+    placeholder=" description"
+  />
+
+  <label for="goalAmount">Goal Amount($):</label>
+  <input
+    [(ngModel)]="campaignData.goalAmount"
+    type="number"
+    name="goalAmount"
+    placeholder=" goalAmount"
+  />
+
+  <label for="iban">IBAN:</label>
+  <input
+    [(ngModel)]="campaignData.iban"
+    type="text"
+    maxlength="32"
+    name="iban"
+    placeholder=" iban"
+  />
+
+  <label for="responsibles">Responsibles:</label>
+  <input
+    [(ngModel)]="responsibles[0]"
+    type="text"
+    name="responsibles"
+    placeholder="responsible"
+  />
+
+  <input
+    *ngFor="let i of [1, 2, 3, 4]"
+    [(ngModel)]="responsibles[i]"
+    type="text"
+    name="responsibles"
+    placeholder="optional "
+  />
+
+  <br />
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form>
+          <div class="form-group">
+            <h3>Logo:</h3>
+            <input
+              (change)="fileProgress($event)"
+              type="file"
+              name="image"
+              accept="image/*"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" (click)="onSubmit()">Create campaign</button>
+</div>

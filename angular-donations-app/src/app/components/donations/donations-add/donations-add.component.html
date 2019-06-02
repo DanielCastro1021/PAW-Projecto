@@ -1,0 +1,16 @@
+<h2>Add Donation</h2>
+<div>
+  <label for="amount">How much you want to donate to this cause:</label>
+  <input [(ngModel)]="donationData.amount" type="number" name="amount" />
+  <button (click)="donate()">Donate</button>
+</div>
+
+<div *ngIf="showErrorAmount" class="error">
+  Sorry you must donate at least 0.1 $
+</div>
+<div *ngIf="showErrorInput" class="error">
+  Sorry this parameter must be filled to donate
+</div>
+<div *ngIf="showErrorNotLogged" class="error">
+  Sorry but you must be logged to donate.
+</div>

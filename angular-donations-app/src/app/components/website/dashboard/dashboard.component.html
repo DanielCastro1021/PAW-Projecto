@@ -1,0 +1,42 @@
+<app-nav-bar></app-nav-bar>
+<div class="row">
+  <div class="column">
+    <ul>
+      <h2>Campaigns:</h2>
+      <br />
+      <li>Status Count:</li>
+      <ul *ngFor="let state of campaignsStatus">
+        <li *ngIf="state._id == 'active'">Active: {{ state.total }}</li>
+        <li *ngIf="state._id == 'disabled'">Disabled: {{ state.total }}</li>
+      </ul>
+      <li>Total Count:{{ campaignsCount }}</li>
+    </ul>
+  </div>
+  <div class="column">
+    <ul>
+      <h2>Donations:</h2>
+      <br />
+      <li>Status Count:</li>
+      <ul *ngFor="let state of donationsStatus">
+        <li *ngIf="state._id == 'processed'">Processed: {{ state.total }}</li>
+        <li *ngIf="state._id == 'in processing'">
+          To Process: {{ state.total }}
+        </li>
+        <li *ngIf="state._id == 'canceled'">Canceled: {{ state.total }}</li>
+      </ul>
+      <li>Total Count:{{ donationsCount }}</li>
+    </ul>
+  </div>
+  <div class="column">
+    <ul>
+      <h2>Users:</h2>
+      <br />
+      <li>Role Count:</li>
+      <ul *ngFor="let state of usersStatus">
+        <li *ngIf="state._id == 'admin'">Admin: {{ state.total }}</li>
+        <li *ngIf="state._id == 'user'">User: {{ state.total }}</li>
+      </ul>
+      <li>Total Count: {{ usersCount }}</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div *ngIf="campaigns" style="padding: 30px" class="container">
+  <h1 style="text-align: center">Our Campaigns</h1>
+  <div class="flip-card" *ngFor="let campaign of campaigns">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img
+          src="http://localhost:3000/api/v1/images/download?filename={{
+            campaign.logo
+          }}"
+          alt="Campaign Image"
+        />
+      </div>
+      <div class="flip-card-back">
+        <div class="text">
+          <br />
+          <br />
+          <h3>{{ campaign.name }}</h3>
+          <br />
+          <p>{{ campaign.description }}</p>
+          Progress:
+          <p>{{ (campaign.currentAmount / campaign.goalAmount) * 100 }}%</p>
+          <button routerLink="/campaign-show-details/{{ campaign._id }}">
+            Donate
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!campaigns">Sorry comeback,later.</div>

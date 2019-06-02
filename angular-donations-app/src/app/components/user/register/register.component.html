@@ -1,0 +1,58 @@
+<div>
+  <h2>Sign Up</h2>
+
+  <label>Username:</label>
+  <input [(ngModel)]="userData.username" type="text" placeholder="username" />
+  <br />
+
+  <label>Password:</label>
+  <input [(ngModel)]="userData.password" type="text" placeholder="password" />
+  <br />
+
+  <label>Full Name:</label>
+  <input [(ngModel)]="userData.fullname" type="text" placeholder="fullname" />
+  <br />
+
+  <label>IBAN:</label>
+  <input [(ngModel)]="userData.iban" type="text" placeholder="iban" />
+  <br />
+
+  <label>NIF:</label>
+  <input [(ngModel)]="userData.nif" type="number" placeholder="nif" />
+  <br />
+
+  <hr />
+  <label>Location:</label> <br />
+  <input type="radio" (change)="toggleCoordinatinates()" name="location" />
+  Coordinates
+  <br />
+  <input type="radio" (change)="toggleAddress()" name="location" /> Address
+  <br />
+
+  <hr />
+  <div *ngIf="coordinatesToggle">
+    <label>Coordinates:</label><br /><br />
+    <label>Latitude:</label>
+    <input
+      [(ngModel)]="userData.coordinates.latitude"
+      type="number"
+      placeholder="latitude"
+    />
+    <br />
+
+    <label>Longitude:</label>
+    <input
+      [(ngModel)]="userData.coordinates.longitude"
+      type="number"
+      placeholder="longitude"
+    />
+  </div>
+
+  <div *ngIf="addressToggle">
+    <label>Address:</label>
+    <input [(ngModel)]="userData.address" type="text" placeholder="address" />
+  </div>
+
+  <button (click)="register()">Sign Up</button>
+  <a routerLink="/login">Sign In</a>
+</div>

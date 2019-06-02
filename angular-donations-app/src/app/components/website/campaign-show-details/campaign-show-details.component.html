@@ -1,0 +1,48 @@
+<div *ngIf="campaign" class="division" height="400px">
+  <h2>Details of {{ campaign.name | uppercase }}</h2>
+  <img
+    src="http://localhost:3000/api/v1/images/download?filename={{
+      campaign.logo
+    }}"
+    alt="Campaign Image"
+  />
+  <div
+    class="progress-bar progress-bar-striped progress-bar-animated"
+    role="progressbar"
+    style="background-color:#00d975; color:black"
+  >
+    <p>Progress: {{ campaign.currentAmount }} / {{ campaign.goalAmount }} $</p>
+  </div>
+
+  <div>
+    <p>Description: {{ campaign.description }}</p>
+
+    <div>
+      <p>Responsibles:</p>
+      <ul *ngFor="let r of campaign.responsibles; let i = index">
+        <li>{{ r }}</li>
+      </ul>
+    </div>
+
+    <div *ngIf="donations">
+      <p>Donations:</p>
+      <br />
+      <ul *ngFor="let d of donations; let j = index">
+        <li>Username: {{ d.username }}</li>
+        <li>Amount: {{ d.amount }} $</li>
+        <br />
+      </ul>
+    </div>
+
+    <div *ngIf="!campaign">
+      <p>Sorry a problem occurred.</p>
+    </div>
+
+    <app-donations-add *ngIf="currentUser"></app-donations-add>
+
+    <div *ngIf="!currentUser">
+      <h4 style="text-align: center">Sorry you must be logged to Donate</h4>
+      <button routerLink="/login">Login</button>
+    </div>
+  </div>
+</div>

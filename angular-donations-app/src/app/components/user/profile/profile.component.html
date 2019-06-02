@@ -1,0 +1,37 @@
+<div>
+  <div *ngIf="user">
+    <h2>My Profile</h2>
+    <p>My Personal Information:</p>
+    <ul>
+      <li>Username: {{ user.username }}</li>
+      <li>Full Name: {{ user.fullname }}</li>
+      <li>NIF: {{ user.nif }}</li>
+      <li>IBAN: {{ user.iban }}</li>
+      <li>Location:</li>
+
+      <li *ngIf="user.coordinates">
+        Coordinates: <br />
+        Latitude: {{ user.coordinates.latitude }} <br />
+        Longitude:
+        {{ user.coordinates.longitude }}
+      </li>
+
+      <li *ngIf="user.address">Address: {{ user.address }}</li>
+    </ul>
+  </div>
+
+  <ul *ngIf="donations">
+    <p>Donations:</p>
+    <br />
+    <ul *ngFor="let d of donations; let j = index">
+      <li>Campaign: {{ d.campaign }}</li>
+      <li>Amount: {{ d.amount }} $</li>
+      <br />
+    </ul>
+    <li>Total Donated: {{ totalSpent }} $</li>
+  </ul>
+
+  <button routerLink="/profile-edit/{{ user._id }}">Edit</button>
+  <button (click)="delete()">Delete Account</button>
+  <button (click)="logOut()">Log Out</button>
+</div>
