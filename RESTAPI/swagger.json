@@ -693,12 +693,23 @@
       }
     },
     "/images/download": {
-      "post": {
+      "get": {
         "tags": ["Image"],
         "summary": "Download image",
         "description": "Download image",
         "produces": ["application/xml", "application/json"],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filename",
+            "description": "Download image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "default": "/"
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful operation"
