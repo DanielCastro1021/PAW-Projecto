@@ -21,15 +21,24 @@ export class CampaignsShowComponent implements OnInit {
     this.serviceGetActiveCampaigns();
   }
 
+  /**
+   * This function gets all the active campaigns, from the REST API.
+   */
   serviceGetActiveCampaigns(): void {
     this.service.getActiveCampaigns().subscribe((data: Campaign[]) => {
+      this.campaigns = [];
       this.campaigns = data;
       for (let i = 0; i < this.campaigns.length; i++) {
         this.getCampaignsCurrentAmount(this.campaigns[i]);
       }
     });
   }
-  getCampaignsCurrentAmount(campaign) {
+
+  /**
+   * This function calculates the current amount of a campaign
+   * @param campaign This is a campaign.
+   */
+  getCampaignsCurrentAmount(campaign): void {
     let amount = 0;
     this.service2
       .getCampaignDonations(campaign._id)

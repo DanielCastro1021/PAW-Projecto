@@ -22,33 +22,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   /**
-   *
+   * This This function registers the user
    */
-  toggleAddress() {
-    if (this.addressToggle === true) {
-      this.addressToggle = false;
-    } else {
-      this.addressToggle = true;
-      this.coordinatesToggle = false;
-    }
-  }
-
-  /**
-   *
-   */
-  toggleCoordinatinates() {
-    if (this.coordinatesToggle === true) {
-      this.coordinatesToggle = false;
-    } else {
-      this.coordinatesToggle = true;
-      this.addressToggle = false;
-      this.getLocation();
-    }
-  }
-  /**
-   *
-   */
-  register() {
+  register(): void {
     if (
       this.validateUsername() &&
       this.validatePassword() &&
@@ -62,9 +38,34 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
+   * This show the address inputs if checked option to show.
    */
-  serviceRegisterUser() {
+  toggleAddress(): void {
+    if (this.addressToggle === true) {
+      this.addressToggle = false;
+    } else {
+      this.addressToggle = true;
+      this.coordinatesToggle = false;
+    }
+  }
+
+  /**
+   * This show the coordinates inputs if checked option to show.
+   */
+  toggleCoordinatinates(): void {
+    if (this.coordinatesToggle === true) {
+      this.coordinatesToggle = false;
+    } else {
+      this.coordinatesToggle = true;
+      this.addressToggle = false;
+      this.getLocation();
+    }
+  }
+
+  /**
+   * This function posts the user, in the REST API.
+   */
+  serviceRegisterUser(): void {
     this.service.register(this.userData).subscribe(
       result => {
         console.log(result);
@@ -77,9 +78,9 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
+   * This function validate the user username.
    */
-  validateUsername() {
+  validateUsername(): boolean {
     if (this.userData.username === undefined) {
       alert('Username must be filled!!!');
       return false;
@@ -89,9 +90,9 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
+   * This function validate the user password.
    */
-  validatePassword() {
+  validatePassword(): boolean {
     if (this.userData.password === undefined) {
       alert('Password must be filled!!!');
       return false;
@@ -101,9 +102,9 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
+   * This function validate the user full name.
    */
-  validateFullName() {
+  validateFullName(): boolean {
     if (this.userData.fullname === undefined) {
       alert('Full name must be filled!!!');
       return false;
@@ -113,9 +114,9 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
+   * This function validate the user location.
    */
-  validateLocation() {
+  validateLocation(): boolean {
     if (this.addressToggle === false && this.coordinatesToggle === false) {
       alert('Must choose your location !!!');
       return false;
@@ -134,8 +135,7 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
-   * @param iban
+   * This function validate the IBAN´s user.
    */
   validateIBAN(): boolean {
     if (this.userData.iban === undefined) {
@@ -145,13 +145,13 @@ export class RegisterComponent implements OnInit {
       alert('IBAN must be valid!!!');
       return false;
     } else {
+      this.userData.iban = this.userData.iban.toUpperCase();
       return true;
     }
   }
 
   /**
-   *
-   * @param iban
+   * This function validate the NIF´s user.
    */
   validateNIF(): boolean {
     if (this.userData.nif === undefined) {
@@ -169,10 +169,10 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
+   * This function validates a NIF.
    * @param value
    */
-  isNIFValid(value) {
+  isNIFValid(value): boolean {
     const nif = typeof value === 'string' ? value : value.toString();
     const validationSets = {
       one: ['1', '2', '3', '5', '6', '8'],
@@ -217,10 +217,10 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
-   * @param input
+   * This function validates a IBAN number.
+   * @param input This is a string with an iban.
    */
-  isValidIBANNumber(input): boolean {
+  isValidIBANNumber(input: any): boolean {
     let CODE_LENGTHS = {
       AD: 24,
       AE: 23,
@@ -303,8 +303,7 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
-   * @param string
+   * This function suport the function of validation of the  an IBAN.
    */
   mod97(string: any): number {
     let checksum = string.slice(0, 2),
@@ -319,7 +318,7 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   *
+   * This obtains the current coordinates of the user.
    */
   getLocation(): void {
     if (window.navigator.geolocation) {
@@ -329,13 +328,15 @@ export class RegisterComponent implements OnInit {
           this.userData.coordinates.longitude = position.coords.longitude;
         },
         failure => {
-          if (failure.message.indexOf('Only secure origins are allowed') == 0) {
+          if (
+            failure.message.indexOf('Only secure origins are allowed') === 0
+          ) {
             alert('Only secure origins are allowed by your browser.');
           }
         }
       );
     } else {
-      console.log("Your browser doesn't support geolocation");
+      alert('Your browser doesn´t support geolocation.');
     }
   }
 }

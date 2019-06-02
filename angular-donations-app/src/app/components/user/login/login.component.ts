@@ -11,16 +11,12 @@ import { User } from '../../../models/User';
 export class LoginComponent implements OnInit {
   @Input() userData: User = new User();
 
-  constructor(
-    public service: AuthenticationService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(public service: AuthenticationService, private router: Router) {}
 
   ngOnInit() {}
 
   /**
-   *
+   * This function authenticates the credentials of a user.
    */
   login() {
     console.log(this.userData);
@@ -34,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   *
+   * This function authenticates the credentials of a user, in the the REST API.
    */
   serviceLogin(): void {
     this.service

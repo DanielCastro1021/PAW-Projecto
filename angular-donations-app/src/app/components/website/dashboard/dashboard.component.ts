@@ -32,6 +32,9 @@ export class DashboardComponent implements OnInit {
     this.service3GetUsersCount();
   }
 
+  /**
+   * This function obtains the campaigns count, by status, from REST API.
+   */
   serviceGetCampaignsStatus(): void {
     this.service.getCampaignStatusSummary().subscribe(
       (data: {}) => {
@@ -43,6 +46,9 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  /**
+   * This function obtains the campaigns count, from REST API.
+   */
   serviceGetCampaignsCount(): void {
     this.service.getCampaignCount().subscribe(
       (data: {}) => {
@@ -54,6 +60,9 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  /**
+   * This function obtains the donations count, by status, from REST API.
+   */
   service2GetDonationsStatus(): void {
     this.service2.getDonationsStatusSummary().subscribe(
       (data: {}) => {
@@ -65,6 +74,9 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  /**
+   * This function obtains the donations count, from REST API.
+   */
   service2GetDonationsCount(): void {
     this.service2.getDonationsCount().subscribe(
       (data: {}) => {
@@ -76,6 +88,9 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  /**
+   * This function obtains the user count, by role, from REST API.
+   */
   service3GetUsersCount(): void {
     this.service3.getUserRoles().subscribe(
       (data: {}) => {
@@ -88,7 +103,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  countUsers(data) {
+  /**
+   *  This function calculates the total amount of users registered.
+   * @param data
+   */
+  countUsers(data: any): void {
     let sum = 0;
     for (let i = 0; i < data.length; i++) {
       sum += data[i].total;

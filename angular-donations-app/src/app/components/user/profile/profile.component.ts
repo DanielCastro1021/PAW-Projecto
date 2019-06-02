@@ -21,7 +21,6 @@ export class ProfileComponent implements OnInit {
     public service: AuthenticationService,
     public service2: RestDonationsService,
     public service3: RestCampaignsService,
-    private route: ActivatedRoute,
     private router: Router
   ) {}
 
@@ -29,16 +28,25 @@ export class ProfileComponent implements OnInit {
     this.serviceGetProfile();
   }
 
-  delete() {
+  /**
+   * This function deletes the current user.
+   */
+  delete(): void {
     this.service.deleteMe(this.user._id).subscribe();
     this.logOut();
   }
 
-  logOut() {
+  /**
+   * This function make the logout for current user.
+   */
+  logOut(): void {
     this.service.logout().subscribe();
     this.router.navigate(['/login']);
   }
 
+  /**
+   * This function gets the user informations made, from the REST API.
+   */
   serviceGetProfile(): void {
     this.service.getMe().subscribe(
       data => {
@@ -52,12 +60,15 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  /**
+   * This function gets the donations made, by the current user, from the REST API.
+   */
   serviceGetUserDonations(): void {
     this.service2.getUserDonations(this.user.username).subscribe(
       (donations: Donation[]) => {
         this.donations = [];
         this.donations = donations;
-        this.getDonationsInfoSpent();
+        this.getCalculateAmountSpentInDonations();
       },
       err => {
         console.log(err);
@@ -65,7 +76,10 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  getDonationsInfoSpent(): void {
+  /**
+   *  This function calculates the total amount spent, by this current user.
+   */
+  getCalculateAmountSpentInDonations(): void {
     this.totalSpent = 0;
     for (let i = 0; i < this.donations.length; i++) {
       this.service3.getCampaign(this.donations[i].campaign).subscribe(

@@ -43,9 +43,9 @@ export class DonationsListComponent implements OnInit {
   }
 
   /**
-   *
+   * This function get all  donations, from the REST API.
    */
-  getAllDonations() {
+  getAllDonations(): void {
     this.service.getDonations().subscribe((data: Donation[]) => {
       this.donations = [];
       this.donations = data;
@@ -56,9 +56,9 @@ export class DonationsListComponent implements OnInit {
   }
 
   /**
-   *
+   * This function get all processed donations, from the REST API.
    */
-  getProcessedDonations() {
+  getProcessedDonations(): void {
     this.service.getProcessedDonations().subscribe((data: Donation[]) => {
       this.donations = [];
       this.donations = data;
@@ -69,9 +69,9 @@ export class DonationsListComponent implements OnInit {
   }
 
   /**
-   *
+   * This function get all not processed donations, from the REST API.
    */
-  getInProcessingDonations() {
+  getInProcessingDonations(): void {
     this.service.getInProcessingDonations().subscribe((data: Donation[]) => {
       this.donations = [];
       this.donations = data;
@@ -82,9 +82,9 @@ export class DonationsListComponent implements OnInit {
   }
 
   /**
-   *
+   * This function get all canceled donations, from the REST API.
    */
-  getCanceledDonations() {
+  getCanceledDonations(): void {
     this.service.getCanceledDonations().subscribe((data: Donation[]) => {
       this.donations = [];
       this.donations = data;
@@ -95,9 +95,9 @@ export class DonationsListComponent implements OnInit {
   }
 
   /**
-   *
+   * This function gets the names of the campaign, of each current donation.
    */
-  getCampaignNameOfDonations() {
+  getCampaignNameOfDonations(): void {
     this.campaignsName = [];
     for (let i = 0; i < this.donations.length; i++) {
       this.service2
@@ -108,7 +108,10 @@ export class DonationsListComponent implements OnInit {
     }
   }
 
-  toggleMap() {
+  /**
+   * This function is a hides/shows the map component.
+   */
+  toggleMap(): void {
     if (this.showMap === true) {
       this.showMap = false;
     } else {

@@ -28,25 +28,23 @@ export class CampaignDetailsComponent implements OnInit {
   }
 
   /**
-   *
-   * @param id
+   * This function activates the current campaign, if deactivated.
+   * @param id This is a string with the Object.Id of the campaign in the database.
    */
-  activateCampaign(id: string) {
+  activateCampaign(id: string): void {
     if (this.campaign.status === 'disabled') {
       this.campaign.status = 'active';
       this.serviceUpdateCampaign(id);
     } else {
-      console.log(
-        'Cant deactivate this campaign, because it isn´t deactivated. '
-      );
+      alert('Cant deactivate this campaign, because it isn´t deactivated. ');
     }
   }
 
   /**
-   *
-   * @param id
+   * This function deactivates the current campaign, if activated.
+   * @param id This is a string with the Object.Id of the campaign in the database.
    */
-  deactivateCampaign(id: string) {
+  deactivateCampaign(id: string): void {
     if (this.donations !== undefined) {
       this.campaign.status = 'disabled';
       this.serviceUpdateCampaign(id);
@@ -58,9 +56,23 @@ export class CampaignDetailsComponent implements OnInit {
   }
 
   /**
-   *
+   * This function calculates the currentAmount of the current campaign.
+   * @param campaign This is the current campaign.
    */
-  serviceGetCampaign() {
+  getCampaignsCurrentAmount(campaign): void {
+    let amount = 0;
+    for (let i = 0; i < this.donations.length; i++) {
+      amount += this.donations[i].amount;
+    }
+    if (campaign.currentAmount < amount) {
+      campaign.currentAmount = amount;
+    }
+  }
+
+  /**
+   * This function gets the informations of this campaign , from the REST API.
+   */
+  serviceGetCampaign(): void {
     this.service
       .getCampaign(this.route.snapshot.params['id'])
       .subscribe((data: Campaign) => {
@@ -70,9 +82,9 @@ export class CampaignDetailsComponent implements OnInit {
   }
 
   /**
-   *
+   * This function gets this campaign donations, from the REST API.
    */
-  serviceGetDonations() {
+  serviceGetDonations(): void {
     this.service2
       .getCampaignDonations(this.route.snapshot.params['id'])
       .subscribe((data: Donation[]) => {
@@ -82,25 +94,11 @@ export class CampaignDetailsComponent implements OnInit {
         }
       });
   }
-
   /**
-   *
-   * @param campaign
+   * This function updates the current campaign, from the REST API.
+   * @param id This is a string with the Object.Id of the campaign in the database.
    */
-  getCampaignsCurrentAmount(campaign) {
-    let amount = 0;
-    for (let i = 0; i < this.donations.length; i++) {
-      amount += this.donations[i].amount;
-    }
-    if (campaign.currentAmount < amount) {
-      campaign.currentAmount = amount;
-    }
-  }
-  /**
-   *
-   * @param id
-   */
-  serviceUpdateCampaign(id: string) {
+  serviceUpdateCampaign(id: string): void {
     this.service.updateCampaign(id, this.campaign).subscribe(
       res => {
         console.log(res);
@@ -113,8 +111,8 @@ export class CampaignDetailsComponent implements OnInit {
   }
 
   /**
-   *
-   * @param id
+   * This function deletes the current campaign, from the REST API.
+   * @param id This is a string with the Object.Id of the campaign in the database.
    */
   serviceDeleteCampaign(id: string) {
     this.service.deleteCampaign(id).subscribe(

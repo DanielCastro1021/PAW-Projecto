@@ -23,9 +23,10 @@ import { HeaderComponent } from './components/website/header/header.component';
 import { FooterComponent } from './components/website/footer/footer.component';
 import { CampaignsShowComponent } from './components/website/campaigns-show/campaigns-show.component';
 import { CampaignShowDetailsComponent } from './components/website/campaign-show-details/campaign-show-details.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/website/dashboard/dashboard.component';
 import { ProfileEditComponent } from './components/user/profile-edit/profile-edit.component';
 import { MapComponent } from './components/donations/map/map.component';
+
 @NgModule({
   declarations: [
     AppComponent,

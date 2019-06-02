@@ -37,7 +37,6 @@
       [(ngModel)]="userData.coordinates.latitude"
       type="number"
       placeholder="latitude"
-      ng-required="!(userData.address)"
     />
     <br />
 
@@ -46,18 +45,12 @@
       [(ngModel)]="userData.coordinates.longitude"
       type="number"
       placeholder="longitude"
-      ng-required="!(userData.address)"
     />
   </div>
 
   <div *ngIf="addressToggle">
     <label>Address:</label>
-    <input
-      [(ngModel)]="userData.address"
-      type="text"
-      placeholder="address"
-      ng-required="!(userData.coordinates.latitude && userData.coordinates.longitude)"
-    />
+    <input [(ngModel)]="userData.address" type="text" placeholder="address" />
   </div>
 
   <button (click)="register()">Sign Up</button>

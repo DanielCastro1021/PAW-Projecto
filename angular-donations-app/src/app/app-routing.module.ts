@@ -14,7 +14,7 @@ import { DonationsAddComponent } from './components/donations/donations-add/dona
 import { DonationsDetailsComponent } from './components/donations/donations-details/donations-details.component';
 import { CampaignsShowComponent } from './components/website/campaigns-show/campaigns-show.component';
 import { CampaignShowDetailsComponent } from './components/website/campaign-show-details/campaign-show-details.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/website/dashboard/dashboard.component';
 import { ProfileEditComponent } from './components/user/profile-edit/profile-edit.component';
 import { LoggedGuard } from './guards/authentication/logged.guard';
 

@@ -12,6 +12,11 @@ import {
 export class AuthenticationGuard implements CanActivate {
   constructor(private router: Router) {}
 
+  /**
+   *  This guard verifies if the current user, is authenticated.
+   * @param route
+   * @param state
+   */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser) {

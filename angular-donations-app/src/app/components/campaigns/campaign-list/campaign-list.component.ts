@@ -37,7 +37,10 @@ export class CampaignListComponent implements OnInit {
     });
   }
 
-  getAllCampaigns() {
+  /**
+   * This function gets all campaigns, from the REST API.
+   */
+  getAllCampaigns(): void {
     this.service.getCampaigns().subscribe((data: Campaign[]) => {
       this.campaigns = [];
       this.campaigns = data;
@@ -50,9 +53,9 @@ export class CampaignListComponent implements OnInit {
   }
 
   /**
-   *
+   * This function gets all active campaigns, from the REST API.
    */
-  getActiveCampaigns() {
+  getActiveCampaigns(): void {
     this.service.getActiveCampaigns().subscribe((data: Campaign[]) => {
       this.campaigns = [];
       this.campaigns = data;
@@ -65,9 +68,9 @@ export class CampaignListComponent implements OnInit {
   }
 
   /**
-   *
+   * This function gets all disabled campaigns, from the REST API.
    */
-  getDisabledCampaigns() {
+  getDisabledCampaigns(): void {
     this.service.getDisabledCampaigns().subscribe((data: Campaign[]) => {
       this.campaigns = [];
       this.campaigns = data;
@@ -79,12 +82,16 @@ export class CampaignListComponent implements OnInit {
     });
   }
 
-  getCampaignsCurrentAmount(campaign) {
+  /**
+   * This function calculates the current amount of a campaign.
+   * @param campaign This a campaign.
+   */
+  getCampaignsCurrentAmount(campaign: Campaign): void {
     let amount = 0;
     this.service2
       .getCampaignDonations(campaign._id)
       .subscribe((data: Donation[]) => {
-        let donations = data;
+        const donations = data;
         for (let i = 0; i < donations.length; i++) {
           amount += donations[i].amount;
         }

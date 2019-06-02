@@ -14,6 +14,11 @@ import { Observable } from 'rxjs';
 export class LoggedGuard implements CanActivate {
   constructor(private router: Router) {}
 
+  /**
+   *  This guard, protects components from a user that is logged .
+   * @param route
+   * @param state
+   */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser) {

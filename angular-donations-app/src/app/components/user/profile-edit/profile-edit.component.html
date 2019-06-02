@@ -1,5 +1,6 @@
 <div>
-  <h2>My Profile</h2>
+  <h2>Sign Up</h2>
+
   <label>Full Name:</label>
   <input [(ngModel)]="userData.fullname" type="text" placeholder="fullname" />
   <br />
@@ -13,38 +14,36 @@
   <br />
 
   <hr />
-  <label>Location:</label><br />
-  <hr />
-  <label>Coordinates:</label><br /><br />
-  <label>Latitude:</label>
-  <input
-    [(ngModel)]="userData.coordinates.latitude"
-    type="number"
-    placeholder="latitude"
-    ng-required="!(userData.address)"
-  />
+  <label>Location:</label> <br />
+  <input type="radio" (change)="toggleCoordinatinates()" name="location" />
+  Coordinates
   <br />
-
-  <label>Longitude:</label>
-  <input
-    [(ngModel)]="userData.coordinates.longitude"
-    type="number"
-    placeholder="longitude"
-    ng-required="!(userData.address)"
-  />
-  <button (click)="getLocation()">
-    Change Coordinates To Current Location
-  </button>
+  <input type="radio" (change)="toggleAddress()" name="location" /> Address
   <br />
 
   <hr />
-  <label>Address:</label>
-  <input
-    [(ngModel)]="userData.address"
-    type="text"
-    placeholder="address"
-    ng-required="!(userData.coordinates.latitude && userData.coordinates.longitude)"
-  />
-  <br />
-  <button (click)="serviceUpdateProfile()">Edit</button>
+  <div *ngIf="coordinatesToggle">
+    <label>Coordinates:</label><br /><br />
+    <label>Latitude:</label>
+    <input
+      [(ngModel)]="userData.coordinates.latitude"
+      type="number"
+      placeholder="latitude"
+    />
+    <br />
+
+    <label>Longitude:</label>
+    <input
+      [(ngModel)]="userData.coordinates.longitude"
+      type="number"
+      placeholder="longitude"
+    />
+  </div>
+
+  <div *ngIf="addressToggle">
+    <label>Address:</label>
+    <input [(ngModel)]="userData.address" type="text" placeholder="address" />
+  </div>
+
+  <button (click)="update()">Edit</button>
 </div>
