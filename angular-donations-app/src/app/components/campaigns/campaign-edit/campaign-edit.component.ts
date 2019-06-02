@@ -41,26 +41,28 @@ export class CampaignEditComponent implements OnInit {
    * This function saves in the REST API, the new campaign and the respective logo.
    */
   onSubmit(): void {
-    const formData = new FormData();
-    formData.append('file', this.logoImage);
-    console.log(formData);
-    this.http
-      .post(this.url, formData, {
-        reportProgress: true,
-        observe: 'events'
-      })
-      .subscribe(events => {
-        if (events.type === HttpEventType.UploadProgress) {
-          console.log(
-            'Upload progress: ',
-            Math.round((events.loaded / events.total) * 100) + '%'
-          );
-        } else if (events.type === HttpEventType.Response) {
-          console.log(events);
+    if (this.validateLogo()) {
+      const formData = new FormData();
+      formData.append('file', this.logoImage);
+      console.log(formData);
+      this.http
+        .post(this.url, formData, {
+          reportProgress: true,
+          observe: 'events'
+        })
+        .subscribe(events => {
+          if (events.type === HttpEventType.UploadProgress) {
+            console.log(
+              'Upload progress: ',
+              Math.round((events.loaded / events.total) * 100) + '%'
+            );
+          } else if (events.type === HttpEventType.Response) {
+            console.log(events);
 
-          this.updateCampaign(events.body);
-        }
-      });
+            this.updateCampaign(events.body);
+          }
+        });
+    }
   }
   updateCampaign(logoPath): void {
     if (this.validateCampaign()) {
@@ -116,10 +118,21 @@ export class CampaignEditComponent implements OnInit {
       this.validateGoalAmount() &&
       this.validateIBAN() &&
       this.validateResponsibles() &&
-      this.logoImage !== null
+      this.validateLogo()
     );
   }
 
+  /**
+   * This function validate the logo, of the campaign to add.
+   */
+  validateLogo(): boolean {
+    if (this.logoImage === null) {
+      alert('Please, insert a logo.');
+      return false;
+    } else {
+      return true;
+    }
+  }
   /**
    * This function validate the name, of the campaign to edit.
    */

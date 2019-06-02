@@ -36,26 +36,28 @@ export class CampaignAddComponent implements OnInit {
    * This function saves in the REST API, the new campaign and the respective logo.
    */
   onSubmit(): void {
-    const formData = new FormData();
-    formData.append('file', this.logoImage);
-    console.log(formData);
-    this.http
-      .post(this.url, formData, {
-        reportProgress: true,
-        observe: 'events'
-      })
-      .subscribe(events => {
-        if (events.type === HttpEventType.UploadProgress) {
-          console.log(
-            'Upload progress: ',
-            Math.round((events.loaded / events.total) * 100) + '%'
-          );
-        } else if (events.type === HttpEventType.Response) {
-          console.log(events);
+    if (this.validateLogo()) {
+      const formData = new FormData();
+      formData.append('file', this.logoImage);
+      console.log(formData);
+      this.http
+        .post(this.url, formData, {
+          reportProgress: true,
+          observe: 'events'
+        })
+        .subscribe(events => {
+          if (events.type === HttpEventType.UploadProgress) {
+            console.log(
+              'Upload progress: ',
+              Math.round((events.loaded / events.total) * 100) + '%'
+            );
+          } else if (events.type === HttpEventType.Response) {
+            console.log(events);
 
-          this.saveCampaign(events.body);
-        }
-      });
+            this.saveCampaign(events.body);
+          }
+        });
+    }
   }
 
   /**
@@ -87,8 +89,20 @@ export class CampaignAddComponent implements OnInit {
       this.validateGoalAmount() &&
       this.validateIBAN() &&
       this.validateResponsible() &&
-      this.logoImage !== null
+      this.validateLogo()
     );
+  }
+
+  /**
+   * This function validate the logo, of the campaign to add.
+   */
+  validateLogo(): boolean {
+    if (this.logoImage === null) {
+      alert('Please, insert a logo.');
+      return false;
+    } else {
+      return true;
+    }
   }
 
   /**
