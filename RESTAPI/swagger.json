@@ -245,7 +245,7 @@
     },
     "/donations": {
       "get": {
-        "tags": ["Donation"],
+        "tags": ["Donations"],
         "summary": "Returns status of campaigns",
         "description": "Returns status of campaigns",
         "produces": ["application/json"],
@@ -260,7 +260,7 @@
         }
       },
       "put": {
-        "tags": ["Donation"],
+        "tags": ["Donations"],
         "summary": "Update donations",
         "description": "Updated donations",
         "produces": ["application/xml", "application/json"],
@@ -284,7 +284,7 @@
     },
     "/donations/{donationId}": {
       "get": {
-        "tags": ["Donation"],
+        "tags": ["Donations"],
         "summary": "Get donation by ID",
         "description": "Get donation by ID",
         "produces": ["application/xml", "application/json"],
@@ -313,7 +313,7 @@
         }
       },
       "put": {
-        "tags": ["Donation"],
+        "tags": ["Donations"],
         "summary": "Updated donation by ID",
         "description": "Updated donation by ID",
         "produces": ["application/xml", "application/json"],
@@ -333,7 +333,7 @@
         }
       },
       "delete": {
-        "tags": ["Donation"],
+        "tags": ["Donations"],
         "summary": "Deletes a donation by ID",
         "description": "Deletes a donation by ID",
         "produces": ["application/xml", "application/json"],
